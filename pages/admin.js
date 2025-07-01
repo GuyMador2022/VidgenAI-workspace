@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 export default function Admin() {
@@ -183,36 +184,36 @@ export default function Admin() {
       <div className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4">
           <div className="flex gap-6 py-4">
-            <a 
+            <Link 
               href="/admin-users" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               👥 ניהול משתמשים
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/admin-analytics" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
-              � אנליטיקה
-            </a>
-            <a 
+              📊 אנליטיקה
+            </Link>
+            <Link 
               href="/admin" 
               className="text-blue-600 font-semibold border-b-2 border-blue-600 pb-2"
             >
               🔑 API Keys
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/admin-pricing" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               💎 עדכון תמחור
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/admin-campaigns" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               🎯 קמפיינים אדמין
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -302,12 +303,12 @@ export default function Admin() {
 
         {/* Back to Home */}
         <div className="text-center mt-8">
-          <a 
+          <Link 
             href="/"
             className="text-blue-600 hover:text-blue-700 underline"
           >
             ← חזור לעמוד הבית
-          </a>
+          </Link>
         </div>
       </div>
     </div>

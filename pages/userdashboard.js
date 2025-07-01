@@ -349,7 +349,7 @@ export default function Dashboard() {
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">💎</div>
                 <h4 className="font-medium text-gray-800">שדרוג חבילה</h4>
-                <p className="text-sm text-gray-600">יותר פיצ'רים</p>
+                <p className="text-sm text-gray-600">יותר פיצ&apos;רים</p>
               </Link>
             </div>
           </div>

@@ -251,7 +251,7 @@ export default function FAQ() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
                 <div className="bg-white bg-opacity-10 rounded-lg p-4">
                   <div className="text-2xl mb-2">💬</div>
-                  <h3 className="font-semibold mb-2">צ'אט חי</h3>
+                  <h3 className="font-semibold mb-2">צ&apos;אט חי</h3>
                   <p className="text-sm opacity-80">זמין 24/7</p>
                 </div>
                 

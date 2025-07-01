@@ -222,7 +222,7 @@ export default function AdminCampaigns() {
           <div className="bg-white rounded-xl shadow-lg p-6 text-center">
             <div className="text-3xl text-purple-600 mb-2">💰</div>
             <div className="text-2xl font-bold text-gray-800">₪{campaigns.reduce((sum, c) => sum + c.spent, 0).toLocaleString()}</div>
-            <div className="text-gray-600">סה"כ הוצאות</div>
+            <div className="text-gray-600">סה&quot;כ הוצאות</div>
           </div>
         </div>
 

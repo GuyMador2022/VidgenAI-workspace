@@ -327,7 +327,7 @@ export default function AdminAnalytics() {
                   <th className="text-right py-3 px-4 font-semibold text-gray-700">#</th>
                   <th className="text-right py-3 px-4 font-semibold text-gray-700">שם</th>
                   <th className="text-right py-3 px-4 font-semibold text-gray-700">אימייל</th>
-                  <th className="text-right py-3 px-4 font-semibold text-gray-700">סה\"כ הוצאה</th>
+                  <th className="text-right py-3 px-4 font-semibold text-gray-700">סה&quot;כ הוצאה</th>
                   <th className="text-right py-3 px-4 font-semibold text-gray-700">פרויקטים</th>
                   <th className="text-right py-3 px-4 font-semibold text-gray-700">פעולות</th>
                 </tr>

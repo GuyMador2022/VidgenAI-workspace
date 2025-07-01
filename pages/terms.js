@@ -22,7 +22,7 @@ export default function Terms() {
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">1. הסכמה לתנאים</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                ברוכים הבאים ל-VidGenAI ("השירות", "הפלטפורמה", "אנו", "שלנו"). על ידי גישה לשירותנו, הרשמה לחשבון, או שימוש בכל חלק מהפלטפורמה, אתם מסכימים להיות קשורים בתנאי השימוש הללו ("התנאים", "ההסכם"). אם אינכם מסכימים לכל התנאים במלואם, אנא הפסיקו את השימוש בשירותנו מיד.
+                ברוכים הבאים ל-VidGenAI (&quot;השירות&quot;, &quot;הפלטפורמה&quot;, &quot;אנו&quot;, &quot;שלנו&quot;). על ידי גישה לשירותנו, הרשמה לחשבון, או שימוש בכל חלק מהפלטפורמה, אתם מסכימים להיות קשורים בתנאי השימוש הללו (&quot;התנאים&quot;, &quot;ההסכם&quot;). אם אינכם מסכימים לכל התנאים במלואם, אנא הפסיקו את השימוש בשירותנו מיד.
               </p>
               <p className="text-gray-700 leading-relaxed mb-4">
                 השירותים שלנו מיועדים למשתמשים בני 18 ומעלה. אם אתם מתחת לגיל 18, תוכלו להשתמש בשירותנו רק תחת פיקוח והסכמה מלאה של הורה או אפוטרופוס חוקי.
@@ -125,7 +125,7 @@ export default function Terms() {
               
               <h3 className="text-xl font-semibold text-gray-800 mb-3">6.1 תוכן שנוצר על ידכם</h3>
               <p className="text-gray-700 leading-relaxed mb-4">
-                התוכן שנוצר באמצעות הפלטפורמה שלנו ("תוכן משתמש") כפוף לתנאים הבאים:
+                התוכן שנוצר באמצעות הפלטפורמה שלנו (&quot;תוכן משתמש&quot;) כפוף לתנאים הבאים:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
                 <li><strong>בעלות:</strong> זכויות היוצרים על התוכן הסופי שלכם שייכות לכם</li>
@@ -139,7 +139,7 @@ export default function Terms() {
               <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
                 <li>הפלטפורמה, האלגוריתמים והטכנולוגיה שלנו מוגנים בזכויות יוצרים</li>
                 <li>אסור לעתק, להנדס לאחור או לחקות את הטכנולוגיה שלנו</li>
-                <li>שירותי הבינה המלאכותית המשולבים כפופים לתנאי ספקיהם (OpenAI, וכו')</li>
+                <li>שירותי הבינה המלאכותית המשולבים כפופים לתנאי ספקיהם (OpenAI, וכו&apos;)</li>
               </ul>
 
               <h3 className="text-xl font-semibold text-gray-800 mb-3">6.3 הליך DMCA ודיווח על הפרות</h3>
@@ -153,7 +153,7 @@ export default function Terms() {
                 <li>הצהרה על תום הלב של הטענה</li>
               </ul>
               <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-blue-800 font-medium">דוא"ל לדיווח הפרות: copyright@vidgenai.com</p>
+                <p className="text-blue-800 font-medium">דוא&quot;ל לדיווח הפרות: copyright@vidgenai.com</p>
               </div>
             </section>
 
@@ -228,7 +228,7 @@ export default function Terms() {
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">10. הגבלת אחריות</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                השירות ניתן "כמו שהוא" וללא אחריות מפורשת או משתמעת:
+                השירות ניתן &quot;כמו שהוא&quot; וללא אחריות מפורשת או משתמעת:
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
                 <li>איננו אחראים לנזקים ישירים או עקיפים</li>

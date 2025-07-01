@@ -1000,9 +1000,9 @@ export default function CreateCampaign() {
                                 className="mt-1 rounded text-purple-600 focus:ring-purple-500"
                               />
                               <div>
-                                <span className="text-blue-600">"</span>
+                                <span className="text-blue-600">&quot;</span>
                                 {message}
-                                <span className="text-blue-600">"</span>
+                                <span className="text-blue-600">&quot;</span>
                               </div>
                             </div>
                           </div>
@@ -1148,7 +1148,7 @@ export default function CreateCampaign() {
                         </button>
                       </div>
                       <div className="mt-3 text-xs text-gray-600">
-                        סה"כ נבחרו: {selectedInsights.painPoints.length + selectedInsights.typicalMessages.length + selectedInsights.postingTimes.length + selectedInsights.commonLanguage.length} פריטים
+                        סה&quot;כ נבחרו: {selectedInsights.painPoints.length + selectedInsights.typicalMessages.length + selectedInsights.postingTimes.length + selectedInsights.commonLanguage.length} פריטים
                       </div>
                     </div>
                   )}

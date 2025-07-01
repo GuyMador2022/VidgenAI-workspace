@@ -431,7 +431,7 @@ export default function CampaignLeads() {
               <p className="text-gray-300 text-lg mb-6">
                 הצטרפו לעסקים חכמים שכבר חוסכים שעות עבודה ואלפי שקלים עם VidGenAI
               </p>
-              <a 
+              <Link 
                 href="/home-new"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 inline-block"
               >

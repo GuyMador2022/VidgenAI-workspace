@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function TestSimple() {
   return (
@@ -11,9 +12,9 @@ export default function TestSimple() {
           <h1 className="text-3xl font-bold text-center mb-8">Test Simple Page</h1>
           <p className="text-center">This is a simple test page to verify basic functionality.</p>
           <div className="mt-8 text-center">
-            <a href="/" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            <Link href="/" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
               Go Home
-            </a>
+            </Link>
           </div>
         </div>
       </div>

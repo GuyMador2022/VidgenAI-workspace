@@ -244,13 +244,13 @@ export default function HomePage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <a 
+            <Link 
               href="/auth"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg"
             >
               התחל ליצור עכשיו 🚀
             </Link>
-            <a 
+            <Link 
               href="#campaigns"
               className="bg-white text-gray-700 font-semibold py-4 px-8 rounded-xl border-2 border-gray-300 hover:border-blue-500 transition duration-200 transform hover:scale-105 shadow-lg"
             >
@@ -369,7 +369,7 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <a
+            <Link
               href="/auth"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg"
             >
@@ -505,7 +505,7 @@ export default function HomePage() {
                       </td>
                       <td className="px-6 py-6 text-center">
                         <div className="text-lg font-bold text-red-600">₪1,200-₪2,000</div>
-                        <div className="text-xs text-gray-500">סושיאל מנג'ר מקצועי</div>
+                        <div className="text-xs text-gray-500">סושיאל מנג&apos;ר מקצועי</div>
                       </td>
                       <td className="px-6 py-6 text-center">
                         <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-bold text-lg">
@@ -563,7 +563,7 @@ export default function HomePage() {
             </div>
             
             <div className="text-center mt-8">
-              <a 
+              <Link 
                 href="/plans"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg inline-block"
               >
@@ -584,13 +584,13 @@ export default function HomePage() {
             הצטרף לאלפי יוצרים שכבר יוצרים קמפיינים מוצלחים עם הפלטפורמה שלנו
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
+            <Link 
               href="/auth"
               className="bg-white text-blue-600 font-semibold py-4 px-8 rounded-xl hover:bg-gray-100 transition duration-200 transform hover:scale-105 shadow-lg"
             >
               התחל חינם עכשיו 🚀
             </Link>
-            <a 
+            <Link 
               href="/plans"
               className="bg-transparent border-2 border-white text-white font-semibold py-4 px-8 rounded-xl hover:bg-white hover:text-blue-600 transition duration-200 transform hover:scale-105"
             >
@@ -688,7 +688,7 @@ export default function HomePage() {
               </div>
 
               <div className="mt-8 pt-6 border-t flex justify-center">
-                <a
+                <Link
                   href="/auth"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105"
                 >

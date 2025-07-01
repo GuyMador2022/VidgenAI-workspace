@@ -454,7 +454,7 @@ export default function Checkout() {
 
                 <div className="pt-6 border-t">
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-lg font-semibold">סה"כ לתשלום:</span>
+                    <span className="text-lg font-semibold">סה&quot;כ לתשלום:</span>
                     <span className="text-2xl font-bold text-purple-600">
                       {isCreditsOnly ? `₪${getCurrentPrice()}` : `$${getCurrentPrice()}`}
                     </span>

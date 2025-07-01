@@ -534,7 +534,7 @@ export default function PricingPublic() {
                     </td>
                     <td className="px-6 py-6 text-center">
                       <div className="text-lg font-bold text-orange-600">₪1,200-₪2,000</div>
-                      <div className="text-xs text-gray-500">סושיאל מנג'ר מקצועי</div>
+                      <div className="text-xs text-gray-500">סושיאל מנג&apos;ר מקצועי</div>
                     </td>
                     <td className="px-6 py-6 text-center">
                       <div className="bg-green-100 text-green-800 px-3 py-2 rounded-full font-bold">
@@ -608,8 +608,8 @@ export default function PricingPublic() {
               <p className="text-gray-600 leading-relaxed">לא! כל החבילות שלנו ללא התחייבות ותוכל לבטל בכל עת דרך הדשבורד האישי שלך.</p>
             </div>
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-              <h3 className="font-bold text-gray-800 mb-4 text-lg">האם המחירים כוללים מע"ם?</h3>
-              <p className="text-gray-600 leading-relaxed">כל המחירים באתר כוללים מע"ם. אין עלויות נסתרות או הפתעות בחיוב.</p>
+              <h3 className="font-bold text-gray-800 mb-4 text-lg">האם המחירים כוללים מע&quot;ם?</h3>
+              <p className="text-gray-600 leading-relaxed">כל המחירים באתר כוללים מע&quot;ם. אין עלויות נסתרות או הפתעות בחיוב.</p>
             </div>
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
               <h3 className="font-bold text-gray-800 mb-4 text-lg">מה ההבדל בין חבילות מנוי לחבילות קרדיטים?</h3>

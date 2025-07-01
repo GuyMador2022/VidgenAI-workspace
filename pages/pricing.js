@@ -192,31 +192,31 @@ export default function AdminPricing() {
       <div className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4">
           <div className="flex gap-6 py-4">
-            <a 
+            <Link 
               href="/admin-users" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               👥 ניהול משתמשים
             </Link>
-            <a 
+            <Link 
               href="/admin-analytics" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               📊 אנליטיקה
             </Link>
-            <a 
+            <Link 
               href="/admin" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               🔑 API Keys
             </Link>
-            <a 
+            <Link 
               href="/pricing" 
               className="text-blue-600 font-semibold border-b-2 border-blue-600 pb-2"
             >
               💎 עדכון תמחור
             </Link>
-            <a 
+            <Link 
               href="/admin-campaigns" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
@@ -257,7 +257,7 @@ export default function AdminPricing() {
             >
               ➕ הוסף חבילה חדשה
             </button>
-            <a
+            <Link
               href="/plans"
               target="_blank"
               className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
@@ -403,7 +403,7 @@ export default function AdminPricing() {
 
         {/* Back to Home */}
         <div className="text-center">
-          <a 
+          <Link 
             href="/"
             className="text-blue-600 hover:text-blue-700 underline"
           >

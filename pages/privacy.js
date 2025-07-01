@@ -51,7 +51,7 @@ export default function Privacy() {
 
               <h3 className="text-xl font-semibold text-gray-800 mb-3">2.3 מידע מצדדים שלישיים</h3>
               <p className="text-gray-700 leading-relaxed">
-                אנו עשויים לקבל מידע על שירותי בינה מלאכותית חיצוניים (OpenAI, ElevenLabs וכו') בתיאום עם ההסכמים שלכם.
+                אנו עשויים לקבל מידע על שירותי בינה מלאכותית חיצוניים (OpenAI, ElevenLabs וכו&apos;) בתיאום עם ההסכמים שלכם.
               </p>
             </section>
 

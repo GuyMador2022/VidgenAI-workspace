@@ -8,7 +8,7 @@ const OnboardingModal = ({
   showOnboarding, 
   onboardingStep, 
   onboardingSteps, 
-  skipOnboarding, 
+  skipOnboarding,
   nextOnboardingStep, 
   setOnboardingStep 
 }) => {
@@ -89,7 +89,7 @@ export default function Dashboard() {
 
     // Load user data (in real app, from authentication)
     loadUserData()
-  }, [router.query])
+  }, [router])
 
   const loadUserData = async () => {
     try {
@@ -119,7 +119,7 @@ export default function Dashboard() {
       free: { name: 'חינמי', color: 'gray', features: ['טקסט בלבד'] },
       basic: { name: 'בסיסי', color: 'blue', features: ['טקסט + תמונות'] },
       professional: { name: 'מקצועי', color: 'purple', features: ['טקסט + תמונות + וידאו'] },
-      enterprise: { name: 'ארגוני', color: 'pink', features: ['כל הפיצ\'רים'] }
+      enterprise: { name: 'ארגוני', color: 'pink', features: ['כל הפיצ&apos;רים'] }
     }
     return plans[planName] || plans.free
   }
@@ -174,8 +174,6 @@ export default function Dashboard() {
     setShowOnboarding(false)
   }
 
-  // OnboardingModal component has been moved outside of Dashboard function
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -196,7 +194,14 @@ export default function Dashboard() {
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         {/* Onboarding Modal */}
-        <OnboardingModal />
+        <OnboardingModal 
+          showOnboarding={showOnboarding}
+          onboardingStep={onboardingStep}
+          onboardingSteps={onboardingSteps}
+          skipOnboarding={skipOnboarding}
+          nextOnboardingStep={nextOnboardingStep}
+          setOnboardingStep={setOnboardingStep}
+        />
         
         {/* Welcome Message */}
         {showWelcome && (
@@ -244,7 +249,7 @@ export default function Dashboard() {
               </div>
               {user?.plan !== 'enterprise' && (
                 <div className="mt-4">
-                  <a 
+                  <Link 
                     href="/pricing" 
                     className="text-blue-600 hover:text-blue-500 text-sm font-medium"
                   >
@@ -304,7 +309,7 @@ export default function Dashboard() {
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">פעולות מהירות</h3>
             <div className="grid md:grid-cols-4 gap-4">
-              <a 
+              <Link 
                 href="/create-campaign" 
                 className={`bg-blue-50 hover:bg-blue-100 border-2 border-blue-200 rounded-lg p-4 text-center transition-colors group ${
                   showOnboarding && onboardingSteps[onboardingStep]?.highlight === 'create-campaign' ? 'ring-4 ring-blue-500 ring-opacity-50' : ''
@@ -315,35 +320,35 @@ export default function Dashboard() {
                 <p className="text-sm text-gray-600">צור קמפיין חדש</p>
               </Link>
 
-              <a 
+              <Link 
                 href="/analytics" 
                 className={`bg-purple-50 hover:bg-purple-100 border-2 border-purple-200 rounded-lg p-4 text-center transition-colors group ${
                   showOnboarding && onboardingSteps[onboardingStep]?.highlight === 'analytics' ? 'ring-4 ring-purple-500 ring-opacity-50' : ''
                 }`}
               >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">�</div>
+                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📊</div>
                 <h4 className="font-medium text-gray-800">אנליטיקס</h4>
                 <p className="text-sm text-gray-600">נתונים ותובנות</p>
               </Link>
 
-              <a 
+              <Link 
                 href="/products" 
                 className={`bg-green-50 hover:bg-green-100 border-2 border-green-200 rounded-lg p-4 text-center transition-colors group ${
                   showOnboarding && onboardingSteps[onboardingStep]?.highlight === 'products' ? 'ring-4 ring-green-500 ring-opacity-50' : ''
                 }`}
               >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">�</div>
+                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📦</div>
                 <h4 className="font-medium text-gray-800">המוצרים שלי</h4>
                 <p className="text-sm text-gray-600">נהל את המוצרים שלך</p>
               </Link>
 
-              <a 
+              <Link 
                 href="/pricing" 
                 className="bg-yellow-50 hover:bg-yellow-100 border-2 border-yellow-200 rounded-lg p-4 text-center transition-colors group"
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">💎</div>
                 <h4 className="font-medium text-gray-800">שדרוג חבילה</h4>
-                <p className="text-sm text-gray-600">יותר פיצ'רים</p>
+                <p className="text-sm text-gray-600">יותר פיצ&apos;רים</p>
               </Link>
             </div>
           </div>
@@ -393,17 +398,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-
-        <OnboardingModal 
-          showOnboarding={showOnboarding}
-          onboardingStep={onboardingStep}
-          onboardingSteps={onboardingSteps}
-          skipOnboarding={skipOnboarding}
-          nextOnboardingStep={nextOnboardingStep}
-          setOnboardingStep={setOnboardingStep}
-        />
       </div>
     </>
   )
 }
-
