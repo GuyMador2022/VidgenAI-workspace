@@ -6,9 +6,7 @@ export default function Dashboard() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showWelcome, setShowWelcome] = useState(false)
-  const              >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📈</div>
-                <h4 className="font-medium text-gray-800">אנליטיקס</h4>howOnboarding, setShowOnboarding] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false)
   const [onboardingStep, setOnboardingStep] = useState(0)
   const [isNewUser, setIsNewUser] = useState(false)
   const router = useRouter()
