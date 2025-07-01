@@ -2,6 +2,71 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
+// Moved the OnboardingModal component outside of Dashboard
+const OnboardingModal = ({ 
+  showOnboarding, 
+  onboardingStep, 
+  onboardingSteps, 
+  skipOnboarding, 
+  nextOnboardingStep, 
+  setOnboardingStep 
+}) => {
+  if (!showOnboarding) return null
+
+  const currentStep = onboardingSteps[onboardingStep]
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+        <div className="text-center mb-6">
+          <div className="text-6xl mb-4">{currentStep.icon}</div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-3">{currentStep.title}</h3>
+          <p className="text-gray-600 leading-relaxed">{currentStep.description}</p>
+        </div>
+
+        <div className="mb-6">
+          <div className="flex justify-center space-x-2">
+            {onboardingSteps.map((_, index) => (
+              <div 
+                key={index}
+                className={`w-3 h-3 rounded-full ${
+                  index === onboardingStep ? 'bg-blue-600' : 'bg-gray-300'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center">
+          <button 
+            onClick={skipOnboarding}
+            className="text-gray-500 hover:text-gray-700 transition-colors"
+          >
+            דלג
+          </button>
+          
+          <div className="flex space-x-3">
+            {onboardingStep > 0 && (
+              <button 
+                onClick={() => setOnboardingStep(onboardingStep - 1)}
+                className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors"
+              >
+                קודם
+              </button>
+            )}
+            <button 
+              onClick={nextOnboardingStep}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
+            >
+              {onboardingStep === onboardingSteps.length - 1 ? 'סיים' : 'הבא'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Dashboard() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -108,62 +173,7 @@ export default function Dashboard() {
     setShowOnboarding(false)
   }
 
-  const OnboardingModal = () => {
-    if (!showOnboarding) return null
-
-    const currentStep = onboardingSteps[onboardingStep]
-
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
-          <div className="text-center mb-6">
-            <div className="text-6xl mb-4">{currentStep.icon}</div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">{currentStep.title}</h3>
-            <p className="text-gray-600 leading-relaxed">{currentStep.description}</p>
-          </div>
-
-          <div className="mb-6">
-            <div className="flex justify-center space-x-2">
-              {onboardingSteps.map((_, index) => (
-                <div 
-                  key={index}
-                  className={`w-3 h-3 rounded-full ${
-                    index === onboardingStep ? 'bg-blue-600' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center">
-            <button 
-              onClick={skipOnboarding}
-              className="text-gray-500 hover:text-gray-700 transition-colors"
-            >
-              דלג
-            </button>
-            
-            <div className="flex space-x-3">
-              {onboardingStep > 0 && (
-                <button 
-                  onClick={() => setOnboardingStep(onboardingStep - 1)}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors"
-                >
-                  קודם
-                </button>
-              )}
-              <button 
-                onClick={nextOnboardingStep}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
-              >
-                {onboardingStep === onboardingSteps.length - 1 ? 'סיים' : 'הבא'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  // OnboardingModal component has been moved outside of Dashboard function
 
   if (loading) {
     return (
@@ -383,7 +393,14 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <OnboardingModal />
+        <OnboardingModal 
+          showOnboarding={showOnboarding}
+          onboardingStep={onboardingStep}
+          onboardingSteps={onboardingSteps}
+          skipOnboarding={skipOnboarding}
+          nextOnboardingStep={nextOnboardingStep}
+          setOnboardingStep={setOnboardingStep}
+        />
       </div>
     </>
   )
