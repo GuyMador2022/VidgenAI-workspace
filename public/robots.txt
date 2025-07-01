@@ -1,0 +1,42 @@
+# robots.txt for VidGenAI
+# This file tells web crawlers which parts of the site they can access
+
+User-agent: *
+Allow: /
+
+# Main sitemap
+Sitemap: https://vidgenai.com/sitemap.xml
+
+# Disallow admin pages from indexing
+Disallow: /admin
+Disallow: /admin-analytics
+Disallow: /admin-users
+
+# Disallow private user areas
+Disallow: /userdashboard
+Disallow: /analytics
+Disallow: /checkout
+
+# Allow important public pages
+Allow: /
+Allow: /landing
+Allow: /landing-he
+Allow: /pricing
+Allow: /faq
+Allow: /auth
+Allow: /signup
+Allow: /terms
+Allow: /privacy
+
+# Common crawl delays
+Crawl-delay: 1
+
+# Block common spam bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /

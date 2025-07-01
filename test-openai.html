@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>בדיקת OpenAI API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(to bottom right, #f0f9ff, #e0e7ff);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #3b82f6;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 14px;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+        button {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .result {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        .success {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            color: #15803d;
+        }
+        .error {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            color: #dc2626;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 בדיקת יצירת סרטון עם OpenAI</h1>
+        
+        <div style="margin-bottom: 20px;">
+            <label for="topic" style="display: block; margin-bottom: 10px; font-weight: bold;">נושא הסרטון:</label>
+            <textarea id="topic" placeholder="לדוגמה: קידום קורס שיווק דיגיטלי מקצועי למתקדמים, כולל 8 מודולים ו-24 שעות תוכן">קידום קורס שיווק דיגיטלי מקצועי למתקדמים, כולל 8 מודולים ו-24 שעות תוכן. הקורס כולל תעודה מוכרת ותמיכה אישית. מחיר מיוחד: 499₪ בלבד!</textarea>
+        </div>
+
+        <button onclick="generateVideo()" id="generateBtn">
+            🚀 צור סרטון עם OpenAI
+        </button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function generateVideo() {
+            const topic = document.getElementById('topic').value.trim();
+            const resultDiv = document.getElementById('result');
+            const generateBtn = document.getElementById('generateBtn');
+            
+            if (!topic) {
+                alert('אנא הכנס נושא לסרטון');
+                return;
+            }
+
+            // Show loading
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = 'יוצר סרטון...';
+            resultDiv.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>יוצר תסריט ותמונה עם OpenAI...</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch('http://localhost:3002/api/generate-video', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        topic: topic,
+                        productData: {
+                            name: 'קורס שיווק דיגיטלי',
+                            description: 'קורס מקיף ללימוד שיווק דיגיטלי',
+                            price: '499',
+                            features: '8 מודולים, 24 שעות תוכן, תעודה מוכרת'
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.innerHTML = `
+                        <div class="result success">
+                            <h3>🎉 הסרטון נוצר בהצלחה!</h3>
+                            <p><strong>נושא:</strong> ${data.topic}</p>
+                            
+                            <h4>📝 התסריט שנוצר:</h4>
+                            <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin: 10px 0; border-right: 4px solid #3b82f6;">
+                                ${data.script}
+                            </div>
+                            
+                            <h4>🎨 תיאור התמונה:</h4>
+                            <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin: 10px 0; border-right: 4px solid #8b5cf6;">
+                                ${data.imagePrompt}
+                            </div>
+                            
+                            ${data.imageUrl ? `
+                                <h4>🖼️ התמונה שנוצרה:</h4>
+                                <div style="text-align: center; margin: 20px 0;">
+                                    <img src="${data.imageUrl}" alt="Generated Image" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                                </div>
+                            ` : ''}
+                            
+                            <h4>📊 סטטוס השלבים:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                ${data.steps.map(step => `
+                                    <li style="padding: 8px; margin: 5px 0; background: ${step.status === 'completed' ? '#dcfce7' : '#fef3c7'}; border-radius: 6px;">
+                                        ${step.status === 'completed' ? '✅' : '⏳'} ${step.description}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                            
+                            <p style="margin-top: 20px; font-weight: bold; color: #059669;">
+                                ${data.message}
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(data.message || data.error || 'שגיאה לא ידועה');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = `
+                    <div class="result error">
+                        <h3>❌ שגיאה ביצירת הסרטון</h3>
+                        <p><strong>הודעת שגיאה:</strong> ${error.message}</p>
+                        <p>אנא בדוק:</p>
+                        <ul>
+                            <li>שהשרת רץ על http://localhost:3002</li>
+                            <li>שמפתח ה-OpenAI מוגדר ב-config/api-keys.json</li>
+                            <li>שיש חיבור לאינטרנט</li>
+                        </ul>
+                    </div>
+                `;
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '🚀 צור סרטון עם OpenAI';
+            }
+        }
+    </script>
+</body>
+</html>
