@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import { useState } from 'react'
 
 export default function Privacy() {
   return (
@@ -264,15 +266,16 @@ export default function Privacy() {
           </div>
 
           <div className="text-center mt-8">
-            <a 
+            <Link 
               href="/signup" 
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors"
             >
               חזור להרשמה
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </>
   )
 }
+

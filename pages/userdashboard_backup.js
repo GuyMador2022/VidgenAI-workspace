@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -248,7 +249,7 @@ export default function Dashboard() {
                     className="text-blue-600 hover:text-blue-500 text-sm font-medium"
                   >
                     שדרג את החבילה ← 
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>
@@ -312,7 +313,7 @@ export default function Dashboard() {
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🎬</div>
                 <h4 className="font-medium text-gray-800">יצירת קמפיין</h4>
                 <p className="text-sm text-gray-600">צור קמפיין חדש</p>
-              </a>
+              </Link>
 
               <a 
                 href="/analytics" 
@@ -323,7 +324,7 @@ export default function Dashboard() {
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">�</div>
                 <h4 className="font-medium text-gray-800">אנליטיקס</h4>
                 <p className="text-sm text-gray-600">נתונים ותובנות</p>
-              </a>
+              </Link>
 
               <a 
                 href="/products" 
@@ -334,7 +335,7 @@ export default function Dashboard() {
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">�</div>
                 <h4 className="font-medium text-gray-800">המוצרים שלי</h4>
                 <p className="text-sm text-gray-600">נהל את המוצרים שלך</p>
-              </a>
+              </Link>
 
               <a 
                 href="/pricing" 
@@ -343,7 +344,7 @@ export default function Dashboard() {
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">💎</div>
                 <h4 className="font-medium text-gray-800">שדרוג חבילה</h4>
                 <p className="text-sm text-gray-600">יותר פיצ'רים</p>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -405,3 +406,4 @@ export default function Dashboard() {
     </>
   )
 }
+

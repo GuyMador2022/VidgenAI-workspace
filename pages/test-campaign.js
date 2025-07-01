@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
 
 export default function TestCampaign() {
   return (
@@ -28,12 +30,12 @@ export default function TestCampaign() {
               🔗 קישורים לבדיקה:
             </p>
             <div className="mt-2 space-y-2">
-              <a href="/create-campaign" className="block text-blue-600 hover:underline">
+              <Link href="/create-campaign" className="block text-blue-600 hover:underline">
                 → דף יצירת קמפיין מלא
-              </a>
-              <a href="/" className="block text-blue-600 hover:underline">
+              </Link>
+              <Link href="/" className="block text-blue-600 hover:underline">
                 → חזרה לדשבורד
-              </a>
+              </Link>
             </div>
           </div>
           
@@ -47,3 +49,4 @@ export default function TestCampaign() {
     </div>
   )
 }
+

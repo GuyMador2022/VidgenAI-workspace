@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -27,24 +28,28 @@ export default function Dashboard() {
   }, [router.query])
 
   const loadUserData = async () => {
-    try {        // Mock user data - in real app, get from session/JWT
-        const mockUser = {
-          id: 'user_123',
-          name: 'יוסי כהן',
-          email: 'yossi@example.com',
-          plan: 'professional',
-          credits: 500,
-          creditsUsed: 45,
-          subscriptionStatus: 'active',
-          nextBillingDate: '2025-07-30',
-          joinDate: '2025-06-01',
-          isAdmin: true // Add admin flag for testing
-        }
+    try {
+      console.log('Loading user data...')
+      // Mock user data - in real app, get from session/JWT
+      const mockUser = {
+        id: 'user_123',
+        name: 'יוסי כהן',
+        email: 'yossi@example.com',
+        plan: 'professional',
+        credits: 500,
+        creditsUsed: 45,
+        subscriptionStatus: 'active',
+        nextBillingDate: '2025-07-30',
+        joinDate: '2025-06-01',
+        isAdmin: true // Add admin flag for testing
+      }
       
       setUser(mockUser)
+      console.log('User data loaded:', mockUser)
     } catch (error) {
       console.error('Error loading user data:', error)
     } finally {
+      console.log('Setting loading to false')
       setLoading(false)
     }
   }
@@ -168,10 +173,21 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <h2 className="text-xl font-semibold text-gray-800">טוען דשבורד...</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">טוען דשבורד...</h2>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">שגיאה בטעינת המשתמש</h2>
+          <p className="text-gray-600">אנא נסה לרענן את הדף</p>
         </div>
       </div>
     )
@@ -234,12 +250,12 @@ export default function Dashboard() {
               </div>
               {user?.plan !== 'enterprise' && (
                 <div className="mt-4">
-                  <a 
+                  <Link 
                     href="/plans" 
                     className="text-blue-600 hover:text-blue-500 text-sm font-medium"
                   >
                     שדרג את החבילה ← 
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>
@@ -294,7 +310,7 @@ export default function Dashboard() {
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">פעולות מהירות</h3>
             <div className="grid md:grid-cols-5 gap-4">
-              <a 
+              <Link 
                 href="/create-campaign" 
                 className={`bg-blue-50 hover:bg-blue-100 border-2 border-blue-200 rounded-lg p-4 text-center transition-colors group ${
                   showOnboarding && onboardingSteps[onboardingStep]?.highlight === 'create-campaign' ? 'ring-4 ring-blue-500 ring-opacity-50' : ''
@@ -303,38 +319,38 @@ export default function Dashboard() {
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🎬</div>
                 <h4 className="font-medium text-gray-800">יצירת קמפיין</h4>
                 <p className="text-sm text-gray-600">צור קמפיין חדש</p>
-              </a>
+              </Link>
 
-              <a 
+              <Link 
                 href="/analytics" 
                 className={`bg-purple-50 hover:bg-purple-100 border-2 border-purple-200 rounded-lg p-4 text-center transition-colors group ${
                   showOnboarding && onboardingSteps[onboardingStep]?.highlight === 'analytics' ? 'ring-4 ring-purple-500 ring-opacity-50' : ''
                 }`}
               >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">�</div>
+                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📊</div>
                 <h4 className="font-medium text-gray-800">אנליטיקס</h4>
                 <p className="text-sm text-gray-600">נתונים ותובנות</p>
-              </a>
+              </Link>
 
-              <a 
+              <Link 
                 href="/products" 
                 className={`bg-green-50 hover:bg-green-100 border-2 border-green-200 rounded-lg p-4 text-center transition-colors group ${
                   showOnboarding && onboardingSteps[onboardingStep]?.highlight === 'products' ? 'ring-4 ring-green-500 ring-opacity-50' : ''
                 }`}
               >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">�</div>
+                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📦</div>
                 <h4 className="font-medium text-gray-800">המוצרים שלי</h4>
                 <p className="text-sm text-gray-600">נהל את המוצרים שלך</p>
-              </a>
+              </Link>
 
-              <a 
+              <Link 
                 href="/plans" 
                 className="bg-yellow-50 hover:bg-yellow-100 border-2 border-yellow-200 rounded-lg p-4 text-center transition-colors group"
               >
                 <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">💎</div>
                 <h4 className="font-medium text-gray-800">שדרוג חבילה</h4>
                 <p className="text-sm text-gray-600">יותר פיצ'רים</p>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -345,50 +361,50 @@ export default function Dashboard() {
                 🛡️ <span className="mr-2">פאנל אדמין</span>
               </h3>
               <div className="grid md:grid-cols-5 gap-4">
-                <a 
+                <Link 
                   href="/admin-users"
                   className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
                 >
                   <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">👥</div>
                   <h4 className="font-medium text-red-800">ניהול משתמשים</h4>
                   <p className="text-sm text-red-600">משתמשים וחבילות</p>
-                </a>
+                </Link>
 
-                <a 
+                <Link 
                   href="/admin-analytics"
                   className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
                 >
                   <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📊</div>
                   <h4 className="font-medium text-red-800">אנליטיקה</h4>
                   <p className="text-sm text-red-600">נתוני מערכת</p>
-                </a>
+                </Link>
 
-                <a 
+                <Link 
                   href="/admin"
                   className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
                 >
                   <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🔑</div>
                   <h4 className="font-medium text-red-800">API Keys</h4>
                   <p className="text-sm text-red-600">הגדרות מפתחות</p>
-                </a>
+                </Link>
 
-                <a 
+                <Link 
                   href="/admin-pricing"
                   className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
                 >
                   <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">💎</div>
                   <h4 className="font-medium text-red-800">עדכון תמחור</h4>
                   <p className="text-sm text-red-600">הגדרות מחירים</p>
-                </a>
+                </Link>
 
-                <a 
+                <Link 
                   href="/admin-campaigns"
                   className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
                 >
                   <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
                   <h4 className="font-medium text-red-800">קמפיינים אדמין</h4>
                   <p className="text-sm text-red-600">ניהול קמפיינים</p>
-                </a>
+                </Link>
               </div>
             </div>
           )}
@@ -440,14 +456,17 @@ export default function Dashboard() {
         </div>
 
         <OnboardingModal />
-        <ShareCampaignModal />
+        <ShareCampaignModal 
+          show={showShareModal}
+          onClose={() => setShowShareModal(false)}
+        />
       </div>
     </>
   )
 }
 
 // Share Campaign Modal Component
-function ShareCampaignModal() {
+function ShareCampaignModal({ show, onClose }) {
   const [selectedCampaign, setSelectedCampaign] = useState('')
   const [shareDescription, setShareDescription] = useState('')
   const [shareSettings, setShareSettings] = useState({
@@ -466,12 +485,12 @@ function ShareCampaignModal() {
   const handleShare = () => {
     // In real app, this would send to API
     alert('הקמפיין שותף בהצלחה! יופיע בגלריית הקמפיינים הציבורית')
-    setShowShareModal(false)
+    onClose()
     setSelectedCampaign('')
     setShareDescription('')
   }
 
-  if (!showShareModal) return null
+  if (!show) return null
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -480,7 +499,7 @@ function ShareCampaignModal() {
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">🌟 שתף קמפיין עם הקהילה</h2>
             <button
-              onClick={() => setShowShareModal(false)}
+              onClick={onClose}
               className="text-gray-500 hover:text-gray-700 text-2xl"
             >
               ✕
@@ -570,7 +589,7 @@ function ShareCampaignModal() {
 
           <div className="flex justify-end gap-3 mt-6 pt-6 border-t">
             <button
-              onClick={() => setShowShareModal(false)}
+              onClick={onClose}
               className="px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
             >
               ביטול
@@ -588,3 +607,4 @@ function ShareCampaignModal() {
     </div>
   )
 }
+

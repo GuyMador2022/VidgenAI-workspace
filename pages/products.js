@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Products() {
@@ -266,14 +267,14 @@ export default function Products() {
                 <span>➕</span>
                 הוסף מוצר/שירות
               </button>
-              <a href="/admin" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+              <Link href="/admin" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>⚙️</span>
                 ניהול
-              </a>
-              <a href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+              </Link>
+              <Link href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>🏠</span>
                 דשבורד
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -764,3 +765,4 @@ export default function Products() {
     </div>
   );
 }
+

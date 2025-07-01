@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   try {
     let testResult = false
-    let errorMessage = ''
+    const errorMessage = ''
 
     switch (platform) {
       case 'openai':

@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 const plans = [
@@ -133,14 +134,14 @@ export default function PricingPublic() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
-              <a href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 VidGenAI
-              </a>
+              </Link>
             </div>
             <div className="flex items-center space-x-4">
-              <a href="/auth" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+              <Link href="/auth" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                 התחברות
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -622,15 +623,16 @@ export default function PricingPublic() {
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-white shadow-2xl">
             <h2 className="text-4xl font-bold mb-6">מוכן להתחיל?</h2>
             <p className="text-xl mb-8 opacity-90">בחר חבילה והתחל ליצור תוכן מדהים עוד היום</p>
-            <a
+            <Link
               href="/auth"
               className="bg-white text-blue-600 font-bold py-4 px-10 rounded-xl hover:bg-gray-100 transition duration-200 inline-block text-lg shadow-lg transform hover:scale-105"
             >
               התחל עכשיו חינם 🚀
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   )
 }
+

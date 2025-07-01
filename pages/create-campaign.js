@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -984,12 +985,12 @@ export default function CreateCampaign() {
                 <p className="text-gray-600 mb-4">
                   תוכלו לקשר מוצר ספציפי לקמפיין כדי ליצור תוכן ממוקד יותר
                 </p>
-                <a 
+                <Link 
                   href="/products"
                   className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200 inline-block"
                 >
                   בחר מוצר מהסל
-                </a>
+                </Link>
               </div>
             )}
 
@@ -1083,18 +1084,18 @@ export default function CreateCampaign() {
                   בחרו מוצר מתוך סל המוצרים שלכם או הוסיפו מוצר חדש
                 </p>
                 <div className="flex gap-3">
-                  <a 
+                  <Link 
                     href="/products"
                     className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200"
                   >
                     בחר מוצר קיים
-                  </a>
-                  <a 
+                  </Link>
+                  <Link 
                     href="/products?add=true"
                     className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200"
                   >
                     הוסף מוצר חדש
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}
@@ -1412,12 +1413,12 @@ export default function CreateCampaign() {
                       >
                         🔄 צור תוכן חדש
                       </button>
-                      <a
+                      <Link
                         href="/"
                         className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-200 text-center"
                       >
                         ✅ עבור לדשבורד
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 )}
@@ -1514,20 +1515,20 @@ export default function CreateCampaign() {
         <div className="max-w-4xl mx-auto mb-6">
           <div className="flex justify-between items-center">
             <div className="flex gap-3">
-              <a href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
+              <Link href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
                 <span>🏠</span>
                 דשבורד
-              </a>
-              <a href="/products" className="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
+              </Link>
+              <Link href="/products" className="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
                 <span>📦</span>
                 סל מוצרים
-              </a>
+              </Link>
             </div>
             {formData.productData && (
-              <a href="/products" className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
+              <Link href="/products" className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
                 <span>←</span>
                 חזרה לסל המוצרים
-              </a>
+              </Link>
             )}
           </div>
         </div>
@@ -1569,18 +1570,19 @@ export default function CreateCampaign() {
 
       <footer className="text-center py-8 text-gray-600">
         <div className="mb-4 flex flex-wrap justify-center gap-2">
-          <a href="/" className="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
+          <Link href="/" className="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
             🎯 דשבורד קמפיינים
-          </a>
-          <a href="/products" className="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
+          </Link>
+          <Link href="/products" className="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
             📦 סל מוצרים
-          </a>
-          <a href="/admin" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
+          </Link>
+          <Link href="/admin" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
             🔧 לוח בקרה אדמין
-          </a>
+          </Link>
         </div>
-        <p>נוצר עם ❤️ על ידי <a href="https://skylens.ai" className="text-blue-600 hover:underline">Skylens.ai</a> | © 2025 VidGenAI</p>
+        <p>נוצר עם ❤️ על ידי <Link href="https://skylens.ai" className="text-blue-600 hover:underline">Skylens.ai</Link> | © 2025 VidGenAI</p>
       </footer>
     </div>
   )
 }
+

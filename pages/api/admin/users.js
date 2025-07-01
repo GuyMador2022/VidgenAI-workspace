@@ -1,5 +1,5 @@
 // Mock API endpoint for user management
-let mockUsers = [
+const mockUsers = [
   {
     id: 1,
     name: 'דני כהן',

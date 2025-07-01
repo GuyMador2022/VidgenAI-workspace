@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -260,13 +261,13 @@ export default function Signup() {
               />
               <label htmlFor="agreeToTerms" className="mr-3 text-sm text-gray-700">
                 אני מסכים ל
-                <a href="/terms" className="text-blue-600 hover:text-blue-500 underline mx-1">
+                <Link href="/terms" className="text-blue-600 hover:text-blue-500 underline mx-1">
                   תנאי השימוש
-                </a>
+                </Link>
                 ול
-                <a href="/privacy" className="text-blue-600 hover:text-blue-500 underline mx-1">
+                <Link href="/privacy" className="text-blue-600 hover:text-blue-500 underline mx-1">
                   מדיניות הפרטיות
-                </a>
+                </Link>
               </label>
             </div>
             {errors.agreeToTerms && <p className="text-red-500 text-sm">{errors.agreeToTerms}</p>}
@@ -290,9 +291,9 @@ export default function Signup() {
           <div className="text-center">
             <p className="text-gray-600">
               כבר יש לך חשבון?{' '}
-              <a href="/login" className="text-blue-600 hover:text-blue-500 font-medium">
+              <Link href="/login" className="text-blue-600 hover:text-blue-500 font-medium">
                 התחבר כאן
-              </a>
+              </Link>
             </p>
           </div>
         </div>
@@ -300,3 +301,4 @@ export default function Signup() {
     </>
   )
 }
+

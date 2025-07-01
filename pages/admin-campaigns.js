@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 export default function AdminCampaigns() {
@@ -161,31 +162,31 @@ export default function AdminCampaigns() {
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               👥 ניהול משתמשים
-            </a>
+            </Link>
             <a 
               href="/admin-analytics" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               📊 אנליטיקה
-            </a>
+            </Link>
             <a 
               href="/admin" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               🔑 API Keys
-            </a>
+            </Link>
             <a 
               href="/admin-pricing" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               💎 עדכון תמחור
-            </a>
+            </Link>
             <a 
               href="/admin-campaigns" 
               className="text-blue-600 font-semibold border-b-2 border-blue-600 pb-2"
             >
               🎯 קמפיינים אדמין
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -438,9 +439,10 @@ export default function AdminCampaigns() {
             className="text-blue-600 hover:text-blue-700 underline"
           >
             ← חזור לעמוד הבית
-          </a>
+          </Link>
         </div>
       </div>
     </div>
   )
 }
+

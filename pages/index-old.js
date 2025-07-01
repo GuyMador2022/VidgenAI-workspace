@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import CampaignCard from '../components/CampaignCard'
 
@@ -216,26 +217,26 @@ export default function Home() {
               <p className="text-gray-600">ניהול ומעקב מקיף אחר כל הקמפיינים שלך</p>
             </div>
             <div className="flex space-x-4 space-x-reverse">
-              <a href="/create-campaign" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+              <Link href="/create-campaign" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>➕</span>
                 קמפיין חדש
-              </a>
-              <a href="/products" className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+              </Link>
+              <Link href="/products" className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>📦</span>
                 סל מוצרים
-              </a>
-              <a href="/plans" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+              </Link>
+              <Link href="/plans" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>💎</span>
                 תמחור
-              </a>
-              <a href="/admin" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+              </Link>
+              <Link href="/admin" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>⚙️</span>
                 ניהול
-              </a>
-              <a href="/landing-he" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
+              </Link>
+              <Link href="/landing-he" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>🏠</span>
                 דף הבית
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -571,3 +572,4 @@ export default function Home() {
     </div>
   )
 }
+

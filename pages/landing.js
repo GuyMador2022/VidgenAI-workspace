@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
 
 export default function Landing() {
   const [email, setEmail] = useState('')
@@ -200,15 +201,16 @@ export default function Landing() {
             © 2025 VidGenAI. Powered by <span className="text-white">Skylens.ai</span>
           </p>
           <div className="mt-4 space-x-6">
-            <a href="/" className="text-blue-400 hover:text-blue-300 transition duration-200">
+            <Link href="/" className="text-blue-400 hover:text-blue-300 transition duration-200">
               🏠 Hebrew Version
-            </a>
-            <a href="/admin" className="text-purple-400 hover:text-purple-300 transition duration-200">
+            </Link>
+            <Link href="/admin" className="text-purple-400 hover:text-purple-300 transition duration-200">
               🔧 Admin Panel
-            </a>
+            </Link>
           </div>
         </div>
       </footer>
     </div>
   )
 }
+

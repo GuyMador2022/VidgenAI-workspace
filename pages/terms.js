@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import { useState } from 'react'
 
 export default function Terms() {
   return (
@@ -197,7 +199,7 @@ export default function Terms() {
                 <li>תוכלו לבקש מחיקת המידע שלכם בכל עת</li>
               </ul>
               <p className="text-gray-700 leading-relaxed">
-                למידע מפורט, עיינו ב<a href="/privacy" className="text-blue-600 hover:underline">מדיניות הפרטיות</a> שלנו.
+                למידע מפורט, עיינו ב<Link href="/privacy" className="text-blue-600 hover:underline">מדיניות הפרטיות</Link> שלנו.
               </p>
             </section>
 
@@ -280,15 +282,16 @@ export default function Terms() {
           </div>
 
           <div className="text-center mt-8">
-            <a 
+            <Link 
               href="/signup" 
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors"
             >
               חזור להרשמה
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </>
   )
 }
+

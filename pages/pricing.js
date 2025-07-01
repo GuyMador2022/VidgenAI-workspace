@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 export default function AdminPricing() {
@@ -196,31 +197,31 @@ export default function AdminPricing() {
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               👥 ניהול משתמשים
-            </a>
+            </Link>
             <a 
               href="/admin-analytics" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               📊 אנליטיקה
-            </a>
+            </Link>
             <a 
               href="/admin" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               🔑 API Keys
-            </a>
+            </Link>
             <a 
               href="/pricing" 
               className="text-blue-600 font-semibold border-b-2 border-blue-600 pb-2"
             >
               💎 עדכון תמחור
-            </a>
+            </Link>
             <a 
               href="/admin-campaigns" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               🎯 קמפיינים אדמין
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -262,7 +263,7 @@ export default function AdminPricing() {
               className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
             >
               👁️ צפה בדף הלקוחות
-            </a>
+            </Link>
           </div>
           <button
             onClick={handleSaveChanges}
@@ -407,9 +408,10 @@ export default function AdminPricing() {
             className="text-blue-600 hover:text-blue-700 underline"
           >
             ← חזור לעמוד הבית
-          </a>
+          </Link>
         </div>
       </div>
     </div>
   )
 }
+

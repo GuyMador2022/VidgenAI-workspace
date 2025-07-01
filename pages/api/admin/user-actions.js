@@ -9,7 +9,7 @@ export default function handler(req, res) {
   }
 
   // Mock user data - in real app this would come from database
-  let mockUsers = [
+  const mockUsers = [
     {
       id: 1,
       name: 'דני כהן',

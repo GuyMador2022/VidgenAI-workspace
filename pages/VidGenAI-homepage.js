@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 export default function HomePage() {
@@ -218,14 +219,14 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <a href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 VidGenAI
-              </a>
+              </Link>
             </div>
             <div className="flex items-center">
-              <a href="/auth" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+              <Link href="/auth" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                 התחברות
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -243,18 +244,18 @@ export default function HomePage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <a 
+            <Link 
               href="/auth"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg"
             >
               התחל ליצור עכשיו 🚀
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="#campaigns"
               className="bg-white text-gray-700 font-semibold py-4 px-8 rounded-xl border-2 border-gray-300 hover:border-blue-500 transition duration-200 transform hover:scale-105 shadow-lg"
             >
               צפה בדוגמאות 👁️
-            </a>
+            </Link>
           </div>
 
           {/* Stats */}
@@ -368,12 +369,12 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <a
+            <Link
               href="/auth"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg"
             >
               התחל ליצור קמפיין משלך 🎯
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -504,7 +505,7 @@ export default function HomePage() {
                       </td>
                       <td className="px-6 py-6 text-center">
                         <div className="text-lg font-bold text-red-600">₪1,200-₪2,000</div>
-                        <div className="text-xs text-gray-500">סושיאל מנג'ר מקצועי</div>
+                        <div className="text-xs text-gray-500">סושיאל מנג&apos;ר מקצועי</div>
                       </td>
                       <td className="px-6 py-6 text-center">
                         <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-bold text-lg">
@@ -562,12 +563,12 @@ export default function HomePage() {
             </div>
             
             <div className="text-center mt-8">
-              <a 
+              <Link 
                 href="/plans"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg inline-block"
               >
                 בחר את החבילה שלך 🚀
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -583,18 +584,18 @@ export default function HomePage() {
             הצטרף לאלפי יוצרים שכבר יוצרים קמפיינים מוצלחים עם הפלטפורמה שלנו
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
+            <Link 
               href="/auth"
               className="bg-white text-blue-600 font-semibold py-4 px-8 rounded-xl hover:bg-gray-100 transition duration-200 transform hover:scale-105 shadow-lg"
             >
               התחל חינם עכשיו 🚀
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/plans"
               className="bg-transparent border-2 border-white text-white font-semibold py-4 px-8 rounded-xl hover:bg-white hover:text-blue-600 transition duration-200 transform hover:scale-105"
             >
               צפה בחבילות התמחור 💎
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -687,12 +688,12 @@ export default function HomePage() {
               </div>
 
               <div className="mt-8 pt-6 border-t flex justify-center">
-                <a
+                <Link
                   href="/auth"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105"
                 >
                   יצירת קמפיין דומה 🚀
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -712,25 +713,25 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold mb-4">מוצר</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#features" className="hover:text-white transition-colors">תכונות</a></li>
-                <li><a href="/plans" className="hover:text-white transition-colors">תמחור</a></li>
-                <li><a href="#campaigns" className="hover:text-white transition-colors">דוגמאות</a></li>
+                <li><Link href="#features" className="hover:text-white transition-colors">תכונות</Link></li>
+                <li><Link href="/plans" className="hover:text-white transition-colors">תמחור</Link></li>
+                <li><Link href="#campaigns" className="hover:text-white transition-colors">דוגמאות</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">תמיכה</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="/faq" className="hover:text-white transition-colors">שאלות נפוצות</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">צור קשר</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">מרכז עזרה</a></li>
+                <li><Link href="/faq" className="hover:text-white transition-colors">שאלות נפוצות</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">צור קשר</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">מרכז עזרה</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">קהילה</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">פורום</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">בלוג</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">עדכונים</a></li>
+                <li><Link href="#" className="hover:text-white transition-colors">פורום</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">בלוג</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">עדכונים</Link></li>
               </ul>
             </div>
           </div>
@@ -742,3 +743,4 @@ export default function HomePage() {
     </div>
   )
 }
+

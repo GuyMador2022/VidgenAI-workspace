@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 export default function CampaignLeads() {
@@ -114,9 +115,9 @@ export default function CampaignLeads() {
         <div className="bg-white shadow-sm">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-center">
-              <a href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 VidGenAI
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -435,7 +436,7 @@ export default function CampaignLeads() {
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 inline-block"
               >
                 גלו עוד על VidGenAI
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -443,3 +444,4 @@ export default function CampaignLeads() {
     </>
   )
 }
+
