@@ -648,7 +648,7 @@ export default function Auth() {
                     <span className="text-white font-semibold text-lg pr-1">+5,000 משתמשים מרוצים</span>
                   </div>
                   <p className="text-blue-100 text-base leading-relaxed italic">
-                    "VidGenAI חסך לנו שעות של עבודה וגרם לסרטונים שלנו להיראות מקצועיים יותר מאי פעם"
+                    &quot;VidGenAI חסך לנו שעות של עבודה וגרם לסרטונים שלנו להיראות מקצועיים יותר מאי פעם&quot;
                   </p>
                 </div>
               </div>
