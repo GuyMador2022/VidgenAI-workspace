@@ -3,8 +3,264 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
+// Product Selector Component
+function ProductSelector({ onProductSelect, selectedProduct }) {
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    description: '',
+    price: '',
+    features: ''
+  })
+
+  useEffect(() => {
+    loadProducts()
+  }, [])
+
+  const loadProducts = () => {
+    // Simulate loading products from localStorage or API
+    try {
+      const savedProducts = localStorage.getItem('user-products')
+      if (savedProducts) {
+        setProducts(JSON.parse(savedProducts))
+      } else {
+        // Default demo products
+        setProducts([
+          {
+            id: 1,
+            name: "קורס בינה מלאכותית מתקדם",
+            description: "קורס מקיף ללמידת AI ו-Machine Learning",
+            price: "1499",
+            features: "30 שיעורים, תעודת סיום, תמיכה אישית"
+          },
+          {
+            id: 2,
+            name: "תוכנת ניהול לקוחות",
+            description: "פתרון CRM מותאם לעסקים קטנים",
+            price: "299",
+            features: "ניהול לידים, דוחות מתקדמים, אפליקציה ניידת"
+          },
+          {
+            id: 3,
+            name: "שירותי עיצוב גרפי",
+            description: "עיצוב מקצועי לעסקים ולוגו וברנדינג",
+            price: "899",
+            features: "לוגו, כרטיס ביקור, ערכת ברנדינג מלאה"
+          },
+          {
+            id: 4,
+            name: "קורס שיווק דיגיטלי",
+            description: "למידת שיווק ברשתות החברתיות",
+            price: "799",
+            features: "20 שיעורים, כלים מתקדמים, תעודת הסמכה"
+          },
+          {
+            id: 5,
+            name: "אפליקציה לניהול משימות",
+            description: "אפליקציית פרודקטיביות לעסקים",
+            price: "199",
+            features: "ניהול צוותים, תזכורות, דוחות התקדמות"
+          }
+        ])
+      }
+    } catch (error) {
+      console.error('Error loading products:', error)
+      setProducts([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const saveProducts = (updatedProducts) => {
+    localStorage.setItem('user-products', JSON.stringify(updatedProducts))
+    setProducts(updatedProducts)
+  }
+
+  const addProduct = () => {
+    if (!newProduct.name.trim() || !newProduct.description.trim() || !newProduct.price.trim()) {
+      alert('יש למלא את כל השדות החובה')
+      return
+    }
+
+    const product = {
+      id: Date.now(),
+      ...newProduct,
+      features: newProduct.features || 'לא צוינו תכונות'
+    }
+
+    const updatedProducts = [...products, product]
+    saveProducts(updatedProducts)
+    setNewProduct({ name: '', description: '', price: '', features: '' })
+    setShowAddForm(false)
+    onProductSelect(product) // Auto-select the new product
+  }
+
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p className="text-gray-600 mt-4">טוען מוצרים...</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      {products.length === 0 ? (
+        // No products - show add product form
+        <div className="text-center">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-8 mb-6">
+            <div className="text-6xl mb-4">📦</div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-3">עדיין לא הוספתם מוצרים</h3>
+            <p className="text-gray-600 mb-4">כדי ליצור קמפיין, עליכם להגדיר לפחות מוצר אחד</p>
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium"
+            >
+              הוסף מוצר ראשון →
+            </button>
+          </div>
+        </div>
+      ) : (
+        // Show products grid
+        <div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            {products.map(product => (
+              <div
+                key={product.id}
+                onClick={() => onProductSelect(product)}
+                className={`p-6 border-2 rounded-xl cursor-pointer transition-all duration-200 ${
+                  selectedProduct?.id === product.id
+                    ? 'border-green-500 bg-green-50 shadow-lg transform scale-105'
+                    : 'border-gray-200 hover:border-blue-300 hover:shadow-md hover:transform hover:scale-102'
+                }`}
+              >
+                {selectedProduct?.id === product.id && (
+                  <div className="text-green-600 text-xl mb-2 text-center">✅ נבחר</div>
+                )}
+                <div className="text-center mb-3">
+                  <div className="text-3xl mb-2">📦</div>
+                  <h4 className="font-semibold text-gray-800 mb-2">{product.name}</h4>
+                </div>
+                <p className="text-gray-600 text-sm mb-3 text-center">{product.description}</p>
+                <div className="text-center mb-3">
+                  <p className="text-blue-600 font-bold text-lg">{product.price}₪</p>
+                </div>
+                <p className="text-gray-500 text-xs text-center bg-gray-50 p-2 rounded">{product.features}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="bg-purple-100 hover:bg-purple-200 text-purple-700 px-6 py-3 rounded-lg transition duration-200 flex items-center gap-2 mx-auto font-medium"
+            >
+              <span>➕</span>
+              הוסף מוצר חדש לסל
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Add Product Form */}
+      {showAddForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-96 overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-800">הוספת מוצר חדש</h3>
+                <button
+                  onClick={() => setShowAddForm(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    שם המוצר *
+                  </label>
+                  <input
+                    type="text"
+                    value={newProduct.name}
+                    onChange={(e) => setNewProduct(prev => ({ ...prev, name: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="לדוגמה: קורס דיגיטל מרקטינג"
+                    dir="rtl"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    תיאור המוצר *
+                  </label>
+                  <textarea
+                    value={newProduct.description}
+                    onChange={(e) => setNewProduct(prev => ({ ...prev, description: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    rows="3"
+                    placeholder="תיאור קצר של המוצר..."
+                    dir="rtl"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    מחיר (₪) *
+                  </label>
+                  <input
+                    type="number"
+                    value={newProduct.price}
+                    onChange={(e) => setNewProduct(prev => ({ ...prev, price: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="299"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    תכונות עיקריות
+                  </label>
+                  <textarea
+                    value={newProduct.features}
+                    onChange={(e) => setNewProduct(prev => ({ ...prev, features: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    rows="2"
+                    placeholder="רשימת תכונות המוצר..."
+                    dir="rtl"
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <button
+                    onClick={addProduct}
+                    className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
+                  >
+                    הוסף מוצר
+                  </button>
+                  <button
+                    onClick={() => setShowAddForm(false)}
+                    className="flex-1 bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-200"
+                  >
+                    ביטול
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function CreateCampaign() {
-  const [currentStep, setCurrentStep] = useState(1)
+  const [currentStep, setCurrentStep] = useState(0) // Start from step 0 for product selection
   const [formData, setFormData] = useState({
     // Step 1: Campaign Info
     campaignName: '',
@@ -46,8 +302,8 @@ export default function CreateCampaign() {
   }) // New: Selected insights from audience analysis
   const router = useRouter()
 
-  const totalSteps = 5
-  const progressPercentage = (currentStep / totalSteps) * 100
+  const totalSteps = 5 // Updated to exclude old product selection step
+  const progressPercentage = currentStep === 0 ? 0 : ((currentStep / 4) * 100) // Don't count step 0 in progress
 
   // New: Auto-save functionality
   useEffect(() => {
@@ -127,11 +383,11 @@ export default function CreateCampaign() {
   }, [router.query])
 
   const steps = [
+    { id: 0, title: 'בחירת מוצר', icon: '🛍️', description: 'בחירת מוצר מהסל (חובה)' },
     { id: 1, title: 'פרטי קמפיין', icon: '🎯', description: 'הגדרת מטרות וקהל יעד' },
     { id: 2, title: 'סוג תוכן', icon: '📝', description: 'בחירת סוג התוכן ונושא' },
-    { id: 3, title: 'מוצר/שירות', icon: '📦', description: 'קישור למוצר (אופציונלי)' },
-    { id: 4, title: 'הגדרות מתקדמות', icon: '⚙️', description: 'פלטפורמות ותקציב' },
-    { id: 5, title: 'יצירת תוכן', icon: '🎬', description: 'יצירה והשלמה' }
+    { id: 3, title: 'הגדרות מתקדמות', icon: '⚙️', description: 'פלטפורמות ותקציב' },
+    { id: 4, title: 'יצירת תוכן', icon: '🎬', description: 'יצירה והשלמה' }
   ]
 
   const campaignGoals = [
@@ -172,6 +428,12 @@ export default function CreateCampaign() {
     const newErrors = {}
     
     switch (step) {
+      case 0:
+        // Product selection is mandatory
+        if (!formData.hasProduct || !formData.productData) {
+          newErrors.product = 'יש לבחור מוצר מהסל או להוסיף מוצר חדש'
+        }
+        break
       case 1:
         if (!formData.campaignName.trim()) newErrors.campaignName = 'שם הקמפיין נדרש'
         if (!formData.campaignGoal) newErrors.campaignGoal = 'יש לבחור מטרה לקמפיין'
@@ -180,7 +442,7 @@ export default function CreateCampaign() {
       case 2:
         if (!formData.topic.trim()) newErrors.topic = 'נושא התוכן נדרש'
         break
-      case 4:
+      case 3:
         if (formData.platforms.length === 0) newErrors.platforms = 'יש לבחור לפחות פלטפורמה אחת'
         break
     }
@@ -191,14 +453,14 @@ export default function CreateCampaign() {
 
   const nextStep = () => {
     if (validateStep(currentStep)) {
-      if (currentStep < totalSteps) {
+      if (currentStep < 4) { // Updated max step
         setCurrentStep(currentStep + 1)
       }
     }
   }
 
   const prevStep = () => {
-    if (currentStep > 1) {
+    if (currentStep > 0) { // Updated min step
       setCurrentStep(currentStep - 1)
     }
   }
@@ -425,9 +687,9 @@ export default function CreateCampaign() {
     }
   }, [currentStep, formData.targetAudience])
 
-  // New: Auto-load posting times and keywords suggestions in step 4
+  // New: Auto-load posting times and keywords suggestions in step 3
   useEffect(() => {
-    if (currentStep === 4 && formData.targetAudience) {
+    if (currentStep === 3 && formData.targetAudience) { // Updated step number
       // Auto-load suggestions for posting times when reaching advanced settings
       fetchAISuggestions('postingTimes', formData.postingTimes)
     }
@@ -435,6 +697,78 @@ export default function CreateCampaign() {
 
   const renderStep = () => {
     switch (currentStep) {
+      case 0:
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">בחירת מוצר לקמפיין</h2>
+              <p className="text-gray-600">בחרו מוצר מהסל שלכם ליצירת קמפיין ממוקד</p>
+            </div>
+
+            {/* Error message if product not selected */}
+            {errors.product && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <p className="text-red-800 text-center font-medium">{errors.product}</p>
+              </div>
+            )}
+
+            {/* Products Grid */}
+            <ProductSelector 
+              onProductSelect={(product) => {
+                updateFormData('productData', product)
+                updateFormData('hasProduct', true)
+              }}
+              selectedProduct={formData.productData}
+            />
+
+            {/* Show selected product confirmation */}
+            {formData.productData && (
+              <div className="mt-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl shadow-lg p-6 border border-green-200">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    ✅ המוצר שנבחר לקמפיין
+                  </h3>
+                  <button
+                    onClick={() => {
+                      updateFormData('productData', null)
+                      updateFormData('hasProduct', false)
+                    }}
+                    className="text-gray-500 hover:text-gray-700 p-1"
+                    title="בטל בחירה"
+                  >
+                    ✕
+                  </button>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-1">{formData.productData.name}</h4>
+                    <p className="text-gray-600 text-sm mb-2">{formData.productData.description}</p>
+                    <p className="text-blue-600 font-bold">{formData.productData.price}₪</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600 mb-1">תכונות עיקריות:</p>
+                    <p className="text-sm text-gray-800">{formData.productData.features}</p>
+                  </div>
+                </div>
+
+                <div className="mt-4 text-center">
+                  <p className="text-green-700 text-sm mb-3">
+                    🎯 המוצר נבחר בהצלחה! כעת תוכלו להמשיך ליצירת הקמפיין
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Instructions */}
+            <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800 text-center">
+                ⚠️ <strong>חובה לבחור מוצר</strong> - בחרו מוצר מהרשימה למעלה כדי להמשיך ליצירת הקמפיין
+              </p>
+            </div>
+          </div>
+        )
+
       case 1:
         return (
           <div className="space-y-6">
@@ -1043,97 +1377,6 @@ export default function CreateCampaign() {
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">קישור מוצר או שירות</h2>
-              <p className="text-gray-600">האם ברצונכם לקשר מוצר ספציפי לקמפיין? (אופציונלי)</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <button
-                onClick={() => updateFormData('hasProduct', false)}
-                className={`p-6 border-2 rounded-lg text-center transition-all duration-200 ${
-                  !formData.hasProduct 
-                    ? 'border-gray-500 bg-gray-50 text-gray-700' 
-                    : 'border-gray-200 hover:border-gray-300 text-gray-600'
-                }`}
-              >
-                <div className="text-4xl mb-3">📝</div>
-                <h3 className="font-semibold mb-2">קמפיין כללי</h3>
-                <p className="text-sm">קמפיין שיווקי כללי ללא קישור למוצר ספציפי</p>
-              </button>
-
-              <button
-                onClick={() => updateFormData('hasProduct', true)}
-                className={`p-6 border-2 rounded-lg text-center transition-all duration-200 ${
-                  formData.hasProduct 
-                    ? 'border-blue-500 bg-blue-50 text-blue-700' 
-                    : 'border-gray-200 hover:border-gray-300 text-gray-600'
-                }`}
-              >
-                <div className="text-4xl mb-3">📦</div>
-                <h3 className="font-semibold mb-2">קמפיין מוצר</h3>
-                <p className="text-sm">קמפיין ממוקד למוצר או שירות ספציפי</p>
-              </button>
-            </div>
-
-            {formData.hasProduct && !formData.productData && (
-              <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-                <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                  📦 בחירת מוצר
-                </h4>
-                <p className="text-gray-600 mb-4">
-                  בחרו מוצר מתוך סל המוצרים שלכם או הוסיפו מוצר חדש
-                </p>
-                <div className="flex gap-3">
-                  <Link 
-                    href="/products"
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200"
-                  >
-                    בחר מוצר קיים
-                  </Link>
-                  <Link 
-                    href="/products?add=true"
-                    className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200"
-                  >
-                    הוסף מוצר חדש
-                  </Link>
-                </div>
-              </div>
-            )}
-
-            {formData.productData && (
-              <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl shadow-lg p-6 border border-green-200">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                    📦 המוצר שנבחר
-                  </h3>
-                  <button
-                    onClick={() => updateFormData('productData', null)}
-                    className="text-gray-500 hover:text-gray-700 p-1"
-                  >
-                    ✕
-                  </button>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-1">{formData.productData.name}</h4>
-                    <p className="text-gray-600 text-sm mb-2">{formData.productData.description}</p>
-                    <p className="text-blue-600 font-bold">{formData.productData.price}₪</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600 mb-1">תכונות עיקריות:</p>
-                    <p className="text-sm text-gray-800">{formData.productData.features}</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        )
-
-      case 4:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-gray-800 mb-2">הגדרות מתקדמות</h2>
               <p className="text-gray-600">בחרו פלטפורמות ותקציב</p>
             </div>
@@ -1292,7 +1535,7 @@ export default function CreateCampaign() {
           </div>
         )
 
-      case 5:
+      case 4:
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
@@ -1462,73 +1705,71 @@ export default function CreateCampaign() {
         </div>
 
         {/* Progress Bar */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-            {/* Progress Percentage */}
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-sm font-medium text-gray-600">
-                שלב {currentStep} מתוך {totalSteps}
-              </span>
-              <span className="text-lg font-bold text-blue-600">
-                {Math.round(progressPercentage)}%
-              </span>
-            </div>
-            
-            {/* Progress Bar */}
-            <div className="w-full bg-gray-200 rounded-full h-3 mb-6">
-              <div 
-                className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500 ease-out"
-                style={{ width: `${progressPercentage}%` }}
-              ></div>
-            </div>
-            
-            {/* Steps */}
-            <div className="flex justify-between">
-              {steps.map((step) => (
-                <div key={step.id} className="flex flex-col items-center">
-                  <div 
-                    className={`w-12 h-12 rounded-full flex items-center justify-center text-lg border-2 transition-all duration-300 ${
-                      currentStep >= step.id 
-                        ? 'bg-blue-500 border-blue-500 text-white' 
-                        : 'bg-gray-100 border-gray-300 text-gray-400'
-                    }`}
-                  >
-                    {step.icon}
-                  </div>
-                  <div className="text-center mt-2">
-                    <div className={`text-xs font-medium ${
-                      currentStep >= step.id ? 'text-blue-600' : 'text-gray-400'
-                    }`}>
-                      {step.title}
+        {currentStep > 0 && ( // Only show progress bar after product selection
+          <div className="max-w-4xl mx-auto mb-8">
+            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+              {/* Progress Percentage */}
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-sm font-medium text-gray-600">
+                  שלב {currentStep} מתוך 5
+                </span>
+                <span className="text-lg font-bold text-blue-600">
+                  {Math.round(progressPercentage)}%
+                </span>
+              </div>
+              
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-200 rounded-full h-3 mb-6">
+                <div 
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500 ease-out"
+                  style={{ width: `${progressPercentage}%` }}
+                ></div>
+              </div>
+              
+              {/* Steps */}
+              <div className="flex justify-between">
+                {steps.filter(step => step.id > 0).map((step) => ( // Filter out step 0
+                  <div key={step.id} className="flex flex-col items-center">
+                    <div 
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-lg border-2 transition-all duration-300 ${
+                        currentStep >= step.id 
+                          ? 'bg-blue-500 border-blue-500 text-white' 
+                          : 'bg-gray-100 border-gray-300 text-gray-400'
+                      }`}
+                    >
+                      {step.icon}
                     </div>
-                    <div className="text-xs text-gray-500 hidden md:block">
-                      {step.description}
+                    <div className="text-center mt-2">
+                      <div className={`text-xs font-medium ${
+                        currentStep >= step.id ? 'text-blue-600' : 'text-gray-400'
+                      }`}>
+                        {step.title}
+                      </div>
+                      <div className="text-xs text-gray-500 hidden md:block">
+                        {step.description}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Navigation */}
         <div className="max-w-4xl mx-auto mb-6">
           <div className="flex justify-between items-center">
             <div className="flex gap-3">
-              <Link href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
+              <Link href="/" className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
                 <span>🏠</span>
-                דשבורד
-              </Link>
-              <Link href="/products" className="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
-                <span>📦</span>
-                סל מוצרים
+                דף הבית
               </Link>
             </div>
             {formData.productData && (
-              <Link href="/products" className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
-                <span>←</span>
-                חזרה לסל המוצרים
-              </Link>
+              <div className="bg-green-100 text-green-700 px-4 py-2 rounded-lg flex items-center gap-2 text-sm">
+                <span>✅</span>
+                נבחר: {formData.productData.name}
+              </div>
             )}
           </div>
         </div>
@@ -1543,13 +1784,13 @@ export default function CreateCampaign() {
           <div className="flex justify-between">
             <button
               onClick={prevStep}
-              disabled={currentStep === 1}
+              disabled={currentStep === 0}
               className="bg-gray-500 text-white px-8 py-3 rounded-lg hover:bg-gray-600 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               ← הקודм
             </button>
             
-            {currentStep < totalSteps ? (
+            {currentStep < 4 ? (
               <button
                 onClick={nextStep}
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition duration-200"
@@ -1558,7 +1799,7 @@ export default function CreateCampaign() {
               </button>
             ) : (
               <button
-                onClick={() => setCurrentStep(1)}
+                onClick={() => setCurrentStep(0)}
                 className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition duration-200"
               >
                 🔄 התחל מחדש
@@ -1569,18 +1810,7 @@ export default function CreateCampaign() {
       </main>
 
       <footer className="text-center py-8 text-gray-600">
-        <div className="mb-4 flex flex-wrap justify-center gap-2">
-          <Link href="/" className="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
-            🎯 דשבורד קמפיינים
-          </Link>
-          <Link href="/products" className="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
-            📦 סל מוצרים
-          </Link>
-          <Link href="/admin" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 text-sm">
-            🔧 לוח בקרה אדמין
-          </Link>
-        </div>
-        <p>נוצר עם ❤️ על ידי <Link href="https://skylens.ai" className="text-blue-600 hover:underline">Skylens.ai</Link> | © 2025 VidGenAI</p>
+        <p>© 2025 VidGenAI</p>
       </footer>
     </div>
   )
