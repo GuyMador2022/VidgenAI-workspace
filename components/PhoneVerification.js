@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react'
 
-const PhoneVerification = ({ onVerificationComplete, onPhoneChange }) => {
-  const [phone, setPhone] = useState('')
+const PhoneVerification = ({ onVerificationComplete, phoneNumber }) => {
   const [code, setCode] = useState('')
-  const [step, setStep] = useState('phone') // 'phone' or 'code'
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [resendTimer, setResendTimer] = useState(0)
   const [attemptsLeft, setAttemptsLeft] = useState(3)
+
+  // Send SMS automatically when component mounts
+  useEffect(() => {
+    if (phoneNumber) {
+      sendVerificationCode()
+    }
+  }, [phoneNumber, sendVerificationCode])
 
   // Countdown timer for resend
   useEffect(() => {
@@ -21,22 +26,7 @@ const PhoneVerification = ({ onVerificationComplete, onPhoneChange }) => {
     return () => clearInterval(interval)
   }, [resendTimer])
 
-  // Format phone number as user types
-  const formatPhoneInput = (value) => {
-    const cleaned = value.replace(/\D/g, '')
-    if (cleaned.length <= 10) {
-      // Format as 0XX-XXX-XXXX
-      if (cleaned.length >= 7) {
-        return cleaned.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
-      } else if (cleaned.length >= 4) {
-        return cleaned.replace(/(\d{3})(\d{3})/, '$1-$2')
-      }
-    }
-    return cleaned
-  }
-
-  const handlePhoneSubmit = async (e) => {
-    e.preventDefault()
+  const sendVerificationCode = async () => {
     setLoading(true)
     setError('')
     setSuccess('')
@@ -47,16 +37,14 @@ const PhoneVerification = ({ onVerificationComplete, onPhoneChange }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phone: phoneNumber }),
       })
 
       const data = await response.json()
 
       if (data.success) {
         setSuccess(data.message)
-        setStep('code')
         setResendTimer(60) // 60 seconds before allowing resend
-        if (onPhoneChange) onPhoneChange(phone)
         
         // In development, show the code in console
         if (data.code) {
@@ -87,7 +75,7 @@ const PhoneVerification = ({ onVerificationComplete, onPhoneChange }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ phone, code }),
+        body: JSON.stringify({ phone: phoneNumber, code }),
       })
 
       const data = await response.json()
@@ -95,7 +83,7 @@ const PhoneVerification = ({ onVerificationComplete, onPhoneChange }) => {
       if (data.success) {
         setSuccess(data.message)
         if (onVerificationComplete) {
-          onVerificationComplete({ phone, verified: true })
+          onVerificationComplete({ phone: phoneNumber, verified: true, success: true })
         }
       } else {
         setError(data.message)
@@ -103,7 +91,6 @@ const PhoneVerification = ({ onVerificationComplete, onPhoneChange }) => {
           setAttemptsLeft(data.attemptsLeft)
         }
         if (data.attemptsLeft === 0) {
-          setStep('phone')
           setCode('')
         }
       }
@@ -119,15 +106,8 @@ const PhoneVerification = ({ onVerificationComplete, onPhoneChange }) => {
       setCode('')
       setError('')
       setSuccess('')
-      setStep('phone')
+      sendVerificationCode()
     }
-  }
-
-  const handleEditPhone = () => {
-    setStep('phone')
-    setCode('')
-    setError('')
-    setSuccess('')
   }
 
   return (

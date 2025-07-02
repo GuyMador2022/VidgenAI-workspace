@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -286,6 +287,47 @@ export default function FAQ() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-xl font-bold mb-4">VidGenAI</h3>
+              <p className="text-gray-400">
+                הפלטפורמה המתקדמת ביותר ליצירת קמפיינים דיגיטליים עם בינה מלאכותית
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">מוצר</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="#features" className="hover:text-white transition-colors">תכונות</Link></li>
+                <li><Link href="/plans" className="hover:text-white transition-colors">תמחור</Link></li>
+                <li><Link href="#campaigns" className="hover:text-white transition-colors">דוגמאות</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">תמיכה</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/faq" className="hover:text-white transition-colors">שאלות נפוצות</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">צור קשר</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">מרכז עזרה</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">קהילה</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="#" className="hover:text-white transition-colors">פורום</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">בלוג</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">עדכונים</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 VidGenAI. כל הזכויות שמורות.</p>
+          </div>
+        </div>
+      </footer>
     </>
   )
 }

@@ -9,7 +9,6 @@ Sitemap: https://vidgenai.com/sitemap.xml
 
 # Disallow admin pages from indexing
 Disallow: /admin
-Disallow: /admin-analytics
 Disallow: /admin-users
 
 # Disallow private user areas

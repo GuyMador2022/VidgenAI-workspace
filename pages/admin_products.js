@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-export default function Products() {
+export default function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -228,8 +228,8 @@ export default function Products() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
-        <title>סל מוצרים ושירותים - VidGenAI</title>
-        <meta name="description" content="נהל את סל המוצרים והשירותים שלך ויצור סרטוני שיווק מותאמים" />
+        <title>ניהול מוצרים ושירותים - אדמין - VidGenAI</title>
+        <meta name="description" content="ניהול מוצרים ושירותים - ממשק אדמין" />
         <style jsx>{`
           .line-clamp-2 {
             display: -webkit-box;
@@ -256,8 +256,8 @@ export default function Products() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">סל מוצרים ושירותים</h1>
-              <p className="text-gray-600">נהל את המוצרים והשירותים שלך ויצור עבורם סרטוני שיווק</p>
+              <h1 className="text-2xl font-bold text-gray-800">ניהול מוצרים ושירותים - אדמין</h1>
+              <p className="text-gray-600">נהל את המוצרים והשירותים במערכת</p>
             </div>
             <div className="flex space-x-4 space-x-reverse">
               <button
@@ -269,11 +269,11 @@ export default function Products() {
               </button>
               <Link href="/admin" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>⚙️</span>
-                ניהול
+                פאנל אדמין
               </Link>
               <Link href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2">
                 <span>🏠</span>
-                דשבורד
+                דף הבית
               </Link>
             </div>
           </div>
@@ -765,4 +765,3 @@ export default function Products() {
     </div>
   );
 }
-

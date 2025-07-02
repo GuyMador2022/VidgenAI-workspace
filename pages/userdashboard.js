@@ -25,7 +25,7 @@ export default function Dashboard() {
 
     // Load user data (in real app, from authentication)
     loadUserData()
-  }, [router.query])
+  }, [router.query, router])
 
   const loadUserData = async () => {
     try {
@@ -40,8 +40,7 @@ export default function Dashboard() {
         creditsUsed: 45,
         subscriptionStatus: 'active',
         nextBillingDate: '2025-07-30',
-        joinDate: '2025-06-01',
-        isAdmin: true // Add admin flag for testing
+        joinDate: '2025-06-01'
       }
       
       setUser(mockUser)
@@ -114,60 +113,137 @@ export default function Dashboard() {
     setShowOnboarding(false)
   }
 
-  const OnboardingModal = () => {
+  const OnboardingTooltip = () => {
     if (!showOnboarding) return null
 
     const currentStep = onboardingSteps[onboardingStep]
-
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
-          <div className="text-center mb-6">
-            <div className="text-6xl mb-4">{currentStep.icon}</div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">{currentStep.title}</h3>
-            <p className="text-gray-600 leading-relaxed">{currentStep.description}</p>
-          </div>
-
-          <div className="mb-6">
-            <div className="flex justify-center space-x-2">
-              {onboardingSteps.map((_, index) => (
-                <div 
-                  key={index}
-                  className={`w-3 h-3 rounded-full ${
-                    index === onboardingStep ? 'bg-blue-600' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
+    
+    // Don't show tooltip for steps without highlight
+    if (!currentStep.highlight) {
+      return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+            <div className="text-center mb-6">
+              <div className="text-6xl mb-4">{currentStep.icon}</div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">{currentStep.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{currentStep.description}</p>
             </div>
-          </div>
 
-          <div className="flex justify-between items-center">
-            <button 
-              onClick={skipOnboarding}
-              className="text-gray-500 hover:text-gray-700 transition-colors"
-            >
-              דלג
-            </button>
-            
-            <div className="flex space-x-3">
-              {onboardingStep > 0 && (
-                <button 
-                  onClick={() => setOnboardingStep(onboardingStep - 1)}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors"
-                >
-                  קודם
-                </button>
-              )}
+            <div className="mb-6">
+              <div className="flex justify-center space-x-2">
+                {onboardingSteps.map((_, index) => (
+                  <div 
+                    key={index}
+                    className={`w-3 h-3 rounded-full ${
+                      index === onboardingStep ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center">
               <button 
-                onClick={nextOnboardingStep}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
+                onClick={skipOnboarding}
+                className="text-gray-500 hover:text-gray-700 transition-colors"
               >
-                {onboardingStep === onboardingSteps.length - 1 ? 'סיים' : 'הבא'}
+                דלג
               </button>
+              
+              <div className="flex space-x-3">
+                {onboardingStep > 0 && (
+                  <button 
+                    onClick={() => setOnboardingStep(onboardingStep - 1)}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors"
+                  >
+                    קודם
+                  </button>
+                )}
+                <button 
+                  onClick={nextOnboardingStep}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
+                >
+                  {onboardingStep === onboardingSteps.length - 1 ? 'סיים' : 'הבא'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )
+    }
+
+    // Position tooltip based on highlight target
+    const getTooltipPosition = () => {
+      switch (currentStep.highlight) {
+        case 'credits':
+          return 'fixed top-32 left-8 transform'
+        case 'create-campaign':
+          return 'fixed top-96 right-8 transform'
+        case 'products':
+          return 'fixed top-96 left-8 transform'
+        case 'analytics':
+          return 'fixed bottom-40 left-8 transform'
+        default:
+          return 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+      }
+    }
+
+    return (
+      <>
+        {/* Overlay */}
+        <div className="fixed inset-0 bg-black bg-opacity-30 z-40" />
+        
+        {/* Tooltip */}
+        <div className={`${getTooltipPosition()} z-50 max-w-sm`}>
+          <div className="bg-white bg-opacity-50 backdrop-blur-sm rounded-xl shadow-2xl p-6 border-2 border-blue-500 relative">
+            
+            <div className="text-center mb-4">
+              <div className="text-4xl mb-2">{currentStep.icon}</div>
+              <h3 className="text-lg font-bold text-gray-800 mb-2">{currentStep.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{currentStep.description}</p>
+            </div>
+
+            <div className="mb-4">
+              <div className="flex justify-center space-x-1">
+                {onboardingSteps.map((_, index) => (
+                  <div 
+                    key={index}
+                    className={`w-2 h-2 rounded-full ${
+                      index === onboardingStep ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <button 
+                onClick={skipOnboarding}
+                className="text-gray-500 hover:text-gray-700 transition-colors text-sm"
+              >
+                דלג
+              </button>
+              
+              <div className="flex space-x-2">
+                {onboardingStep > 0 && (
+                  <button 
+                    onClick={() => setOnboardingStep(onboardingStep - 1)}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg transition-colors text-sm"
+                  >
+                    קודם
+                  </button>
+                )}
+                <button 
+                  onClick={nextOnboardingStep}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition-colors text-sm"
+                >
+                  {onboardingStep === onboardingSteps.length - 1 ? 'סיים' : 'הבא'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
     )
   }
 
@@ -201,8 +277,8 @@ export default function Dashboard() {
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-        {/* Onboarding Modal */}
-        <OnboardingModal />
+        {/* Onboarding Tooltip */}
+        <OnboardingTooltip />
         
         {/* Welcome Message */}
         {showWelcome && (
@@ -309,7 +385,19 @@ export default function Dashboard() {
           {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">פעולות מהירות</h3>
-            <div className="grid md:grid-cols-5 gap-4">
+            <div className="flex justify-center">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+              <Link 
+                href="/products" 
+                className={`bg-green-50 hover:bg-green-100 border-2 border-green-200 rounded-lg p-4 text-center transition-colors group ${
+                  showOnboarding && onboardingSteps[onboardingStep]?.highlight === 'products' ? 'ring-4 ring-green-500 ring-opacity-50' : ''
+                }`}
+              >
+                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📦</div>
+                <h4 className="font-medium text-gray-800">המוצרים שלי</h4>
+                <p className="text-sm text-gray-600">נהל את המוצרים שלך</p>
+              </Link>
+
               <Link 
                 href="/create-campaign" 
                 className={`bg-blue-50 hover:bg-blue-100 border-2 border-blue-200 rounded-lg p-4 text-center transition-colors group ${
@@ -333,17 +421,6 @@ export default function Dashboard() {
               </Link>
 
               <Link 
-                href="/products" 
-                className={`bg-green-50 hover:bg-green-100 border-2 border-green-200 rounded-lg p-4 text-center transition-colors group ${
-                  showOnboarding && onboardingSteps[onboardingStep]?.highlight === 'products' ? 'ring-4 ring-green-500 ring-opacity-50' : ''
-                }`}
-              >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📦</div>
-                <h4 className="font-medium text-gray-800">המוצרים שלי</h4>
-                <p className="text-sm text-gray-600">נהל את המוצרים שלך</p>
-              </Link>
-
-              <Link 
                 href="/plans" 
                 className="bg-yellow-50 hover:bg-yellow-100 border-2 border-yellow-200 rounded-lg p-4 text-center transition-colors group"
               >
@@ -351,63 +428,9 @@ export default function Dashboard() {
                 <h4 className="font-medium text-gray-800">שדרוג חבילה</h4>
                 <p className="text-sm text-gray-600">יותר פיצ&apos;רים</p>
               </Link>
-            </div>
-          </div>
-
-          {/* Admin Panel - Only for admins */}
-          {user?.isAdmin && (
-            <div className="bg-red-50 border-2 border-red-200 rounded-xl shadow-lg p-6 mb-8">
-              <h3 className="text-lg font-semibold text-red-800 mb-4 flex items-center">
-                🛡️ <span className="mr-2">פאנל אדמין</span>
-              </h3>
-              <div className="grid md:grid-cols-5 gap-4">
-                <Link 
-                  href="/admin-users"
-                  className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
-                >
-                  <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">👥</div>
-                  <h4 className="font-medium text-red-800">ניהול משתמשים</h4>
-                  <p className="text-sm text-red-600">משתמשים וחבילות</p>
-                </Link>
-
-                <Link 
-                  href="/admin-analytics"
-                  className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
-                >
-                  <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📊</div>
-                  <h4 className="font-medium text-red-800">אנליטיקה</h4>
-                  <p className="text-sm text-red-600">נתוני מערכת</p>
-                </Link>
-
-                <Link 
-                  href="/admin"
-                  className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
-                >
-                  <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🔑</div>
-                  <h4 className="font-medium text-red-800">API Keys</h4>
-                  <p className="text-sm text-red-600">הגדרות מפתחות</p>
-                </Link>
-
-                <Link 
-                  href="/admin-pricing"
-                  className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
-                >
-                  <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">💎</div>
-                  <h4 className="font-medium text-red-800">עדכון תמחור</h4>
-                  <p className="text-sm text-red-600">הגדרות מחירים</p>
-                </Link>
-
-                <Link 
-                  href="/admin-campaigns"
-                  className="bg-red-100 hover:bg-red-200 border-2 border-red-300 rounded-lg p-4 text-center transition-colors group"
-                >
-                  <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
-                  <h4 className="font-medium text-red-800">קמפיינים אדמין</h4>
-                  <p className="text-sm text-red-600">ניהול קמפיינים</p>
-                </Link>
               </div>
             </div>
-          )}
+          </div>
 
           {/* Recent Activity */}
           <div className="bg-white rounded-xl shadow-lg p-6">
@@ -455,11 +478,52 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <OnboardingModal />
+        <OnboardingTooltip />
         <ShareCampaignModal 
           show={showShareModal}
           onClose={() => setShowShareModal(false)}
         />
+
+        {/* Footer */}
+        <footer className="bg-gray-800 text-white py-12">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-4 gap-8">
+              <div>
+                <h3 className="text-xl font-bold mb-4">VidGenAI</h3>
+                <p className="text-gray-400">
+                  הפלטפורמה המתקדמת ביותר ליצירת קמפיינים דיגיטליים עם בינה מלאכותית
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-4">מוצר</h4>
+                <ul className="space-y-2 text-gray-400">
+                  <li><Link href="#features" className="hover:text-white transition-colors">תכונות</Link></li>
+                  <li><Link href="/plans" className="hover:text-white transition-colors">תמחור</Link></li>
+                  <li><Link href="#campaigns" className="hover:text-white transition-colors">דוגמאות</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-4">תמיכה</h4>
+                <ul className="space-y-2 text-gray-400">
+                  <li><Link href="/faq" className="hover:text-white transition-colors">שאלות נפוצות</Link></li>
+                  <li><Link href="#" className="hover:text-white transition-colors">צור קשר</Link></li>
+                  <li><Link href="#" className="hover:text-white transition-colors">מרכז עזרה</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-4">קהילה</h4>
+                <ul className="space-y-2 text-gray-400">
+                  <li><Link href="#" className="hover:text-white transition-colors">פורום</Link></li>
+                  <li><Link href="#" className="hover:text-white transition-colors">בלוג</Link></li>
+                  <li><Link href="#" className="hover:text-white transition-colors">עדכונים</Link></li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+              <p>&copy; 2025 VidGenAI. כל הזכויות שמורות.</p>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   )

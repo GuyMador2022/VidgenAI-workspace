@@ -224,7 +224,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="flex items-center">
-              <Link href="/auth" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+              <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                 התחברות
               </Link>
             </div>
@@ -245,10 +245,10 @@ export default function HomePage() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Link 
-              href="/auth"
+              href="/signup"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg"
             >
-              התחל ליצור עכשיו 🚀
+              התחל ליצור קמפיין משלך 🎯
             </Link>
             <Link 
               href="#campaigns"
@@ -367,15 +367,6 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/auth"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg"
-            >
-              התחל ליצור קמפיין משלך 🎯
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -425,7 +416,7 @@ export default function HomePage() {
             <div className="bg-white rounded-2xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <div className="text-5xl mb-4">⚡</div>
               <h3 className="text-xl font-bold text-gray-800 mb-4">מהירות יצירה</h3>
-              <p className="text-gray-600">מקמפיין רעיון ועד לפרסום חי תוך מספר דקות בלבד</p>
+              <p className="text-gray-600">מרעיון לקמפיין ועד לפרסום קמפיין חי תוך מספר דקות בלבד</p>
             </div>
           </div>
         </div>
@@ -585,7 +576,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              href="/auth"
+              href="/signup"
               className="bg-white text-blue-600 font-semibold py-4 px-8 rounded-xl hover:bg-gray-100 transition duration-200 transform hover:scale-105 shadow-lg"
             >
               התחל חינם עכשיו 🚀
@@ -689,7 +680,7 @@ export default function HomePage() {
 
               <div className="mt-8 pt-6 border-t flex justify-center">
                 <Link
-                  href="/auth"
+                  href="/signup"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-blue-700 hover:to-purple-700 transition duration-200 transform hover:scale-105"
                 >
                   יצירת קמפיין דומה 🚀
@@ -743,4 +734,3 @@ export default function HomePage() {
     </div>
   )
 }
-

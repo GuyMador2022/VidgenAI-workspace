@@ -26,18 +26,6 @@ export default function Custom404() {
           <Link href="/" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 inline-block">
             🏠 חזור לבית
           </Link>
-          <Link href="/landing" className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 inline-block">
-            🌍 English Version
-          </Link>
-        </div>
-        
-        <div className="mt-12 text-gray-500">
-          <p>או בדוק את הקישורים הללו:</p>
-          <div className="mt-4 space-x-4">
-            <Link href="/admin" className="text-blue-600 hover:underline">
-              לוח בקרה אדמין
-            </Link>
-          </div>
         </div>
       </div>
     </div>

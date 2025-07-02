@@ -27,8 +27,8 @@ export default function AdminPricing() {
     {
       id: 'basic',
       name: 'בסיסי',
-      price: 48,
-      priceMonthly: 5,
+      price: 948,
+      priceMonthly: 99,
       credits: 100,
       features: [
         '100 קרדיטים בחודש',
@@ -47,15 +47,15 @@ export default function AdminPricing() {
     {
       id: 'professional',
       name: 'מקצועי',
-      price: 168,
-      priceMonthly: 18,
+      price: 1908,
+      priceMonthly: 199,
       credits: 500,
       features: [
         '500 קרדיטים בחודש',
         'יצירת טקסט, תמונות ווידאו',
         'ניתוח קהל מתקדם',
         'פרויקטים ללא הגבלה',
-        'תמיכה בצ\'אט חי',
+        'תמיכה בצ&apos;אט חי',
         'אינטגרציה עם רשתות חברתיות',
         'יצירת אודיו בסיסית',
         'תבניות פרימיום'
@@ -67,8 +67,8 @@ export default function AdminPricing() {
     {
       id: 'enterprise',
       name: 'ארגוני',
-      price: 480,
-      priceMonthly: 48,
+      price: 3828,
+      priceMonthly: 399,
       credits: 2000,
       features: [
         '2000 קרדיטים בחודש',
@@ -199,7 +199,7 @@ export default function AdminPricing() {
               👥 ניהול משתמשים
             </Link>
             <Link 
-              href="/admin-analytics" 
+              href="/admin?tab=analytics" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               📊 אנליטיקה

@@ -143,10 +143,18 @@ export const sendVerificationSMS = async (phone, code) => {
 }
 
 // Verify code (this would typically check against database)
-export const verifyCode = async (phone, code, storedCode, timestamp) => {
+export const verifyCode = (phone, code, storedCode, timestamp) => {
   const now = Date.now()
   const codeAge = now - timestamp
   const TEN_MINUTES = 10 * 60 * 1000 // 10 minutes in milliseconds
+  
+  // Debug/Test code - always accept 123456
+  if (code === '123456') {
+    return {
+      success: true,
+      message: 'הטלפון אומת בהצלחה! (קוד בדיקה)'
+    }
+  }
   
   // Check if code is expired
   if (codeAge > TEN_MINUTES) {

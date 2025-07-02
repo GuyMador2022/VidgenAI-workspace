@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -685,7 +686,7 @@ export default function CreateCampaign() {
       // Auto-load suggestions for campaign name when user has target audience
       fetchAISuggestions('campaignName', formData.campaignName)
     }
-  }, [currentStep, formData.targetAudience])
+  }, [currentStep, formData.targetAudience, fetchAISuggestions, formData.campaignName])
 
   // New: Auto-load posting times and keywords suggestions in step 3
   useEffect(() => {
@@ -693,7 +694,7 @@ export default function CreateCampaign() {
       // Auto-load suggestions for posting times when reaching advanced settings
       fetchAISuggestions('postingTimes', formData.postingTimes)
     }
-  }, [currentStep, formData.targetAudience])
+  }, [currentStep, formData.targetAudience, fetchAISuggestions, formData.postingTimes])
 
   const renderStep = () => {
     switch (currentStep) {
@@ -1640,9 +1641,11 @@ export default function CreateCampaign() {
                           🖼️ התמונה שנוצרה
                         </h4>
                         <div className="text-center">
-                          <img 
+                          <Image 
                             src={formData.generatedContent.imageUrl} 
                             alt="Generated Campaign Content" 
+                            width={400}
+                            height={400}
                             className="max-w-full max-h-96 mx-auto rounded-lg shadow-lg border border-gray-200"
                           />
                         </div>
@@ -1759,12 +1762,6 @@ export default function CreateCampaign() {
         {/* Navigation */}
         <div className="max-w-4xl mx-auto mb-6">
           <div className="flex justify-between items-center">
-            <div className="flex gap-3">
-              <Link href="/" className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm">
-                <span>🏠</span>
-                דף הבית
-              </Link>
-            </div>
             {formData.productData && (
               <div className="bg-green-100 text-green-700 px-4 py-2 rounded-lg flex items-center gap-2 text-sm">
                 <span>✅</span>
@@ -1809,8 +1806,45 @@ export default function CreateCampaign() {
         </div>
       </main>
 
-      <footer className="text-center py-8 text-gray-600">
-        <p>© 2025 VidGenAI</p>
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <Link href="/VidGenAI-homepage" className="text-xl font-bold mb-4 text-white hover:text-blue-300 transition-colors block">VidGenAI</Link>
+              <p className="text-gray-400">
+                הפלטפורמה המתקדמת ביותר ליצירת קמפיינים דיגיטליים עם בינה מלאכותית
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">מוצר</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="#features" className="hover:text-white transition-colors">תכונות</Link></li>
+                <li><Link href="/plans" className="hover:text-white transition-colors">תמחור</Link></li>
+                <li><Link href="#campaigns" className="hover:text-white transition-colors">דוגמאות</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">תמיכה</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/faq" className="hover:text-white transition-colors">שאלות נפוצות</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">צור קשר</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">מרכז עזרה</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">קהילה</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="#" className="hover:text-white transition-colors">פורום</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">בלוג</Link></li>
+                <li><Link href="#" className="hover:text-white transition-colors">עדכונים</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 VidGenAI. כל הזכויות שמורות.</p>
+          </div>
+        </div>
       </footer>
     </div>
   )

@@ -164,7 +164,7 @@ export default function AdminCampaigns() {
               👥 ניהול משתמשים
             </Link>
             <Link 
-              href="/admin-analytics" 
+              href="/admin?tab=analytics" 
               className="text-gray-600 hover:text-blue-600 pb-2 transition-colors"
             >
               📊 אנליטיקה

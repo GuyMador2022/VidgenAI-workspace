@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -27,23 +28,23 @@ export default function Checkout() {
     basic: {
       name: 'בסיסי',
       credits: 100,
-      monthlyPrice: 5,
-      yearlyPrice: 48,
+      monthlyPrice: 99,
+      yearlyPrice: 948,
       features: ['יצירת טקסט ותמונות', 'ניתוח קהל בסיסי', '25 פרויקטים', 'תמיכה באימייל']
     },
     professional: {
       name: 'מקצועי',
       credits: 500,
-      monthlyPrice: 18,
-      yearlyPrice: 168,
-      features: ['יצירת טקסט, תמונות ווידאו', 'ניתוח קהל מתקדם', 'פרויקטים ללא הגבלה', 'תמיכה בצ\'אט']
+      monthlyPrice: 199,
+      yearlyPrice: 1908,
+      features: ['יצירת טקסט, תמונות ווידאו', 'ניתוח קהל מתקדם', 'פרויקטים ללא הגבלה', 'תמיכה בצ&apos;אט']
     },
     enterprise: {
       name: 'ארגוני',
       credits: 2000,
-      monthlyPrice: 48,
-      yearlyPrice: 480,
-      features: ['כל הפיצ\'רים', 'API מותאם', 'תמיכה VIP', 'ניהול צוות']
+      monthlyPrice: 399,
+      yearlyPrice: 3828,
+      features: ['כל הפיצ&apos;רים', 'API מותאם', 'תמיכה VIP', 'ניהול צוות']
     }
   }
 
@@ -58,11 +59,14 @@ export default function Checkout() {
     } else if (router.query.plan && plans[router.query.plan]) {
       setSelectedPlan(router.query.plan)
       setIsCreditsOnly(false)
+    } else {
+      // Default to professional plan if no plan is specified
+      setSelectedPlan('professional')
     }
     if (router.query.billing) {
       setBillingCycle(router.query.billing)
     }
-  }, [router.query])
+  }, [router.query, plans])
 
   const getCurrentPrice = () => {
     if (isCreditsOnly && creditsPackage) {
@@ -168,8 +172,14 @@ export default function Checkout() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">טוען...</h2>
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">בוחר תוכנית...</h2>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <button
+            onClick={() => setSelectedPlan('professional')}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-200"
+          >
+            המשך לתשלום
+          </button>
         </div>
       </div>
     )
@@ -226,7 +236,7 @@ export default function Checkout() {
                     </div>
                     <div className="text-left">
                       <span className="text-2xl font-bold text-gray-900">
-                        ${getCurrentPrice()}
+                        ₪{getCurrentPrice()}
                       </span>
                       <span className="text-gray-600 text-sm block">
                         ל{billingCycle === 'monthly' ? 'חודש' : 'שנה'}
@@ -236,7 +246,7 @@ export default function Checkout() {
                   {billingCycle === 'yearly' && getSavings() > 0 && (
                     <div className="bg-green-50 border border-green-200 rounded-md p-3 mb-4">
                       <p className="text-green-800 text-sm font-medium">
-                        🎉 חוסך ${getSavings()} בשנה עם התשלום השנתי!
+                        🎉 חוסך ₪{getSavings()} בשנה עם התשלום השנתי!
                       </p>
                     </div>
                   )}
@@ -265,7 +275,7 @@ export default function Checkout() {
                       }`}
                     >
                       <div className="font-medium">חודשי</div>
-                      <div className="text-sm text-gray-600">${plans[selectedPlan]?.monthlyPrice}/חודש</div>
+                      <div className="text-sm text-gray-600">₪{plans[selectedPlan]?.monthlyPrice}/חודש</div>
                     </button>
                     <button
                       onClick={() => setBillingCycle('yearly')}
@@ -277,11 +287,11 @@ export default function Checkout() {
                     >
                       {getSavings() > 0 && (
                         <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-                          חסוך ${getSavings()}
+                          חסוך ₪{getSavings()}
                         </span>
                       )}
                       <div className="font-medium">שנתי</div>
-                      <div className="text-sm text-gray-600">${plans[selectedPlan]?.yearlyPrice}/שנה</div>
+                      <div className="text-sm text-gray-600">₪{plans[selectedPlan]?.yearlyPrice}/שנה</div>
                     </button>
                   </div>
                 </div>
@@ -302,8 +312,7 @@ export default function Checkout() {
                     />
                     <span>כרטיס אשראי</span>
                     <div className="mr-auto flex space-x-2">
-                      <img src="/visa.png" alt="Visa" className="h-6" />
-                      <img src="/mastercard.png" alt="Mastercard" className="h-6" />
+                      <Image src="/assets/images/icons/visa_icon.svg" alt="Visa" width={24} height={24} className="h-6" />
                     </div>
                   </label>
                   <label className="flex items-center">
@@ -316,6 +325,9 @@ export default function Checkout() {
                       className="mr-3"
                     />
                     <span>PayPal</span>
+                    <div className="mr-auto flex space-x-2">
+                      <Image src="/assets/images/icons/paypal_icon.svg" alt="PayPal" width={24} height={24} className="h-6" />
+                    </div>
                   </label>
                 </div>
               </div>
@@ -456,7 +468,7 @@ export default function Checkout() {
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-lg font-semibold">סה&quot;כ לתשלום:</span>
                     <span className="text-2xl font-bold text-purple-600">
-                      {isCreditsOnly ? `₪${getCurrentPrice()}` : `$${getCurrentPrice()}`}
+                      ₪{getCurrentPrice()}
                     </span>
                   </div>
                   
@@ -471,7 +483,7 @@ export default function Checkout() {
                         מעבד תשלום...
                       </div>
                     ) : (
-                      isCreditsOnly ? `שלם ₪${getCurrentPrice()} והתחל` : `שלם $${getCurrentPrice()} והתחל`
+                      `שלם ₪${getCurrentPrice()} והתחל`
                     )}
                   </button>
 

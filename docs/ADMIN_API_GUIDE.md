@@ -12,7 +12,7 @@
 - פעולות ניהול משתמשים
 - סטטיסטיקות משתמשים
 
-### 📊 אנליטיקה מתקדמת - `/admin-analytics`
+### 📊 אנליטיקה מתקדמת - `/admin` (טאב אנליטיקה)
 - נתונים ודוחות מפורטים
 - גרפים וסטטיסטיקות
 - ניתוח ביצועים
@@ -58,7 +58,7 @@
 - סל מוצרים: `/products`
 - עמוד ניהול: `/admin`
 - ניהול משתמשים: `/admin-users`
-- אנליטיקה: `/admin-analytics`
+- אנליטיקה: `/admin?tab=analytics`
 - יצירת תוכן לקמפיין: `/create-campaign`
 - אימות: `/auth`
 

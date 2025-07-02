@@ -5,7 +5,6 @@ module.exports = {
   generateIndexSitemap: false,
   exclude: [
     '/admin*',
-    '/admin-analytics',
     '/admin-users',
     '/userdashboard',
     '/analytics',
@@ -19,7 +18,6 @@ module.exports = {
         allow: '/',
         disallow: [
           '/admin',
-          '/admin-analytics', 
           '/admin-users',
           '/userdashboard',
           '/analytics',

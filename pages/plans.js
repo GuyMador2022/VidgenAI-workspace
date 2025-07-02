@@ -30,54 +30,58 @@ const plans = [
   {
     id: 'basic',
     name: 'חבילה בסיסית',
-    price: 1188,
+    price: 948,
     priceMonthly: 99,
-    credits: 50,
+    credits: 100,
     features: [
-      'עד 5 פוסטים בחודש',
-      'טקסט + תמונות + קריינות',
-      'תזמון אוטומטי',
-      'תבניות מוכנות',
+      '100 קרדיטים בחודש',
+      'יצירת טקסט ותמונות',
+      'ניתוח קהל בסיסי',
+      '25 פרויקטים',
       'תמיכה באימייל',
-      'ניתוח ביצועים בסיסי'
+      'תבניות מוכנות'
     ],
     limitations: [
-      'ללא סרטוני AI',
-      'ללא חיבור רשתות חברתיות'
+      'ללא יצירת וידאו',
+      'ללא תמיכה מתקדמת'
     ],
     buttonText: 'התחל עכשיו',
     buttonColor: 'bg-blue-600 hover:bg-blue-700',
     popular: false
   },
   {
-    id: 'advanced',
-    name: 'חבילה מתקדמת',
-    price: 2388,
+    id: 'professional',
+    name: 'חבילה מקצועית',
+    price: 1908,
     priceMonthly: 199,
-    credits: 100,
+    credits: 500,
     features: [
-      'עד 20 פוסטים בחודש',
-      'כולל סרטוני AI',
-      'חיבור לפייסבוק/אינסטגרם',
-      'ניתוח ביצועים מתקדם',
-      'תמיכה בצ\'אט חי',
-      'אינטגרציה עם רשתות חברתיות',
-      'יצירת אודיו מתקדמת',
-      'תבניות פרימיום'
+      '500 קרדיטים בחודש',
+      'יצירת טקסט, תמונות ווידאו',
+      'ניתוח קהל מתקדם',
+      'פרויקטים ללא הגבלה',
+      'תמיכה בצ&apos;אט חי',
+      'חיבור לרשתות חברתיות',
+      'תבניות פרימיום',
+      'יצירת אודיו מתקדמת'
     ],
     limitations: [],
-    buttonText: 'שדרג למתקדמת',
+    buttonText: 'שדרג למקצועית',
     buttonColor: 'bg-purple-600 hover:bg-purple-700',
     popular: true
   },
   {
-    id: 'agency',
-    name: 'חבילת סוכנות',
-    price: 5988,
-    priceMonthly: 499,
-    credits: 500,
+    id: 'enterprise',
+    name: 'חבילת ארגון',
+    price: 3828,
+    priceMonthly: 399,
+    credits: 2000,
     features: [
-      'עד 10 לקוחות',
+      '2000 קרדיטים בחודש',
+      'כל הפיצ&apos;רים',
+      'API מותאם אישית',
+      'תמיכה VIP',
+      'ניהול צוות',
       'White Label מלא',
       'API מותאם אישית',
       'גישה לצוותים',
@@ -139,7 +143,7 @@ export default function PricingPublic() {
               </Link>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/auth" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+              <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                 התחברות
               </Link>
             </div>
@@ -624,7 +628,7 @@ export default function PricingPublic() {
             <h2 className="text-4xl font-bold mb-6">מוכן להתחיל?</h2>
             <p className="text-xl mb-8 opacity-90">בחר חבילה והתחל ליצור תוכן מדהים עוד היום</p>
             <Link
-              href="/auth"
+              href="/signup"
               className="bg-white text-blue-600 font-bold py-4 px-10 rounded-xl hover:bg-gray-100 transition duration-200 inline-block text-lg shadow-lg transform hover:scale-105"
             >
               התחל עכשיו חינם 🚀
